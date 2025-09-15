@@ -35,6 +35,10 @@ import component.ProductPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Dashboard extends javax.swing.JFrame {
    private SalesTracker tracker;  
@@ -56,6 +60,8 @@ public class Dashboard extends javax.swing.JFrame {
 
    CardLayout cl = (CardLayout) jPanel17.getLayout();
     cl.show(jPanel17, "Dashboard");
+    
+    setTime();
     
     }
     
@@ -88,6 +94,8 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel16 = new RoundPanel(20);
         jLabel23 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jTxtTime = new javax.swing.JLabel();
+        jTxtDate = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
         dashboardPanel1 = new component.DashboardPanel();
 
@@ -289,6 +297,18 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel2.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 174, 40));
 
+        Font roboto1 = FontLoader.loadFont("resources/fonts/Roboto-ExtraBold.ttf", 20f);
+        jTxtTime.setFont(roboto1);
+        jTxtTime.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTxtTime.setText("jLabel4");
+        jPanel2.add(jTxtTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 180, -1));
+
+        Font roboto3 = FontLoader.loadFont("resources/fonts/Roboto-ExtraBold.ttf", 15f);
+        jTxtDate.setFont(roboto3);
+        jTxtDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTxtDate.setText("jLabel4");
+        jPanel2.add(jTxtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 180, -1));
+
         jPanel17.setBackground(Color.decode("#1A1A1A"));
         jPanel17.setOpaque(false);
         jPanel17.setPreferredSize(new java.awt.Dimension(842, 567));
@@ -372,7 +392,38 @@ public class Dashboard extends javax.swing.JFrame {
    jPanel12.setBackground(Color.decode("#5541CB"));
 
     }//GEN-LAST:event_jPanel12MouseClicked
-
+    public void setTime() {
+        new Thread(new Runnable() {
+            @Override
+            @SuppressWarnings("empty-statement")
+            public void run() {
+                while(true) {
+                    try {
+                        Thread.sleep(1000);
+                    }
+                    catch(InterruptedException ex) {
+                        Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                  Date date = new Date();
+                  SimpleDateFormat tf = new SimpleDateFormat("h:mm:ssaa");
+                  SimpleDateFormat df = new SimpleDateFormat("EEEE, dd-MM-yyyy");
+                  String time = tf.format(date);
+                  String[] timeParts = time.split(" ");
+                          
+                  SwingUtilities.invokeLater(() -> {
+                    if(timeParts.length >= 2) {
+                        jTxtTime.setText(timeParts[0] + " " + timeParts[1]);
+                    }
+                    else {
+                        jTxtTime.setText(time);
+                    }
+                    jTxtDate.setText(df.format(date));
+                
+                });
+            }
+        }
+    }).start();
+    }
     /**
      * @param args the command line arguments
      */
@@ -428,6 +479,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jTxtDate;
+    private javax.swing.JLabel jTxtTime;
     private javax.swing.JButton simulateBtn;
     // End of variables declaration//GEN-END:variables
 
