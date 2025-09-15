@@ -14,10 +14,13 @@ import java.util.Map;
 public class SalesTracker {
  
     private Map<String, Map<String, Integer>> salesData;
+     private Map<String, ProductSearch> products;
+     
     private int INITIAL_STOCK = 1015;
 
     public SalesTracker() {
         salesData = new HashMap<>();
+        
 
         addLocation("Manila");
         addLocation("Taguig");
@@ -76,7 +79,7 @@ public class SalesTracker {
     public Map<String, Map<String, Integer>> getSalesData() {
         return salesData;
     }
-    // In SalesTracker
+
 public String getTopLocation() {
     String bestLocation = null;
     int maxLocSales = 0;
