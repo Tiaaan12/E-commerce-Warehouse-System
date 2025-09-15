@@ -29,6 +29,7 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.data.category.DefaultCategoryDataset;
 import com.formdev.flatlaf.FlatDarculaLaf;
+import component.LocationPanel;
 import component.ProductPanel;
 
 
@@ -45,6 +46,7 @@ public class Dashboard extends javax.swing.JFrame {
    private final int INITIAL_STOCK = 1015;
    private int mouseX, mouseY;
    private ProductPanel productPanel;
+   private LocationPanel locationPanel;
     /**
      * Creates new form Dashboard
      */
@@ -57,7 +59,9 @@ public class Dashboard extends javax.swing.JFrame {
          productPanel = new ProductPanel();
          productPanel.setOpaque(false);
          jPanel17.add(productPanel, "Product");
-
+         locationPanel = new LocationPanel();
+         locationPanel.setOpaque(false);
+         jPanel17.add(locationPanel, "Location");
    CardLayout cl = (CardLayout) jPanel17.getLayout();
     cl.show(jPanel17, "Dashboard");
     
@@ -191,6 +195,11 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel14.setBackground(Color.decode("#212121"));
         jPanel14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel14MouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(dmSans);
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -382,6 +391,7 @@ public class Dashboard extends javax.swing.JFrame {
     cl.show(jPanel17, "Product");
         jPanel15.setBackground(Color.decode("#5541CB"));
      jPanel12.setBackground(Color.decode("#212121"));
+      jPanel14.setBackground(Color.decode("#212121"));
 
     }//GEN-LAST:event_jPanel15MouseClicked
 
@@ -390,8 +400,17 @@ public class Dashboard extends javax.swing.JFrame {
     cl.show(jPanel17, "Dashboard");
    jPanel15.setBackground(Color.decode("#212121"));
    jPanel12.setBackground(Color.decode("#5541CB"));
+   jPanel14.setBackground(Color.decode("#212121"));
 
     }//GEN-LAST:event_jPanel12MouseClicked
+    
+    private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked
+          CardLayout cl = (CardLayout) jPanel17.getLayout();
+    cl.show(jPanel17, "Location");
+     jPanel15.setBackground(Color.decode("#212121"));
+     jPanel12.setBackground(Color.decode("#212121"));
+     jPanel14.setBackground(Color.decode("#5541CB"));
+    }//GEN-LAST:event_jPanel14MouseClicked
     public void setTime() {
         new Thread(new Runnable() {
             @Override

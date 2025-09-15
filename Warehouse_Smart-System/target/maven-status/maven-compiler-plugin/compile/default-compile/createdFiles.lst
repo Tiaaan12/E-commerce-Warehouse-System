@@ -28,6 +28,7 @@ com\mycompany\warehouse_smart\system\RoundPanel.class
 com\mycompany\warehouse_smart\system\Products$2.class
 com\mycompany\warehouse_smart\system\Products$9.class
 util\FontLoader.class
+com\mycompany\warehouse_smart\system\Dashboard$10.class
 com\mycompany\warehouse_smart\system\Products$5.class
 com\mycompany\warehouse_smart\system\Styledpanel.class
 component\ProductPanel$1.class

@@ -4,6 +4,11 @@
  */
 package component;
 
+import com.mycompany.warehouse_smart.system.Styledpanel;
+import java.awt.Color;
+import java.awt.Font;
+import util.FontLoader;
+
 /**
  *
  * @author cvdev
@@ -26,19 +31,93 @@ public class LocationPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel7 = new javax.swing.JLabel();
+        jPanel13 = new Styledpanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        TaguigLoc = new javax.swing.JLabel();
+        PasayLoc = new javax.swing.JLabel();
+        ManilaLoc = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+
+        Font inter = FontLoader.loadFont("resources/fonts/Inter_28pt-ExtraBold.ttf", 25f);
+        jLabel7.setFont(inter);
+        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Location");
+
+        jPanel13.setBackground(Color.decode("#212121"));
+        jPanel13.setPreferredSize(new java.awt.Dimension(177, 175));
+        jPanel13.setLayout(null);
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/notif.png"))); // NOI18N
+        jPanel13.add(jLabel4);
+        jLabel4.setBounds(10, 10, 24, 25);
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Untitled (60 x 60 px).png"))); // NOI18N
+
+        jLayeredPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TaguigLoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pin.png"))); // NOI18N
+        TaguigLoc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLayeredPane1.add(TaguigLoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 310, -1, -1));
+
+        PasayLoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pin.png"))); // NOI18N
+        PasayLoc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLayeredPane1.add(PasayLoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, -1, -1));
+
+        ManilaLoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pin.png"))); // NOI18N
+        ManilaLoc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLayeredPane1.add(ManilaLoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Map.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jLayeredPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 460));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 556, Short.MAX_VALUE)
+                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel11)
+                        .addGap(19, 19, 19))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(18, 18, 18)
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel ManilaLoc;
+    private javax.swing.JLabel PasayLoc;
+    private javax.swing.JLabel TaguigLoc;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JPanel jPanel13;
     // End of variables declaration//GEN-END:variables
 }
