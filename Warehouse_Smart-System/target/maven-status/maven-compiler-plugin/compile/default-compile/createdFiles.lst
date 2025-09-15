@@ -1,5 +1,6 @@
 com\mycompany\warehouse_smart\system\Dashboard$2.class
 com\mycompany\warehouse_smart\system\Products$1.class
+component\ReportsPanel.class
 com\mycompany\warehouse_smart\system\Login$1.class
 com\mycompany\warehouse_smart\system\Dashboard$5.class
 com\mycompany\warehouse_smart\system\Products$10.class
@@ -30,7 +31,9 @@ com\mycompany\warehouse_smart\system\Products$5.class
 com\mycompany\warehouse_smart\system\Styledpanel.class
 component\ProductPanel$1.class
 com\mycompany\warehouse_smart\system\Dashboard$3.class
+component\ProductPanel$4.class
 com\mycompany\warehouse_smart\system\Dashboard$6.class
 com\mycompany\warehouse_smart\system\SalesTracker.class
 component\DashboardPanel.class
+component\LocationPanel.class
 com\mycompany\warehouse_smart\system\Products$8.class

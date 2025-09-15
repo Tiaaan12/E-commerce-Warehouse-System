@@ -23,27 +23,33 @@ public class SalesTracker {
         addLocation("Taguig");
         addLocation("Pasay");
 
-        addProduct("Aquaflask A");
-        addProduct("Aquaflask B");
-        addProduct("Aquaflask C");
+        addProduct("AquaThirst Colorwave Flip");
+        addProduct("AquaThirst Dream 532ml");
+        addProduct("Cylinder Collections 24oz");
+        addProduct("Slate Cup Collection 16oz");
+        addProduct("Tumbler Collection (30oz)");
 
-        // Default initial totals
-        recordSale("Manila", "Aquaflask A", 120);
-        recordSale("Taguig", "Aquaflask A", 100);
-        recordSale("Pasay", "Aquaflask A", 140);
+        
+        recordSale("Manila", "AquaThirst Colorwave Flip", 120);
+        recordSale("Taguig", "AquaThirst Colorwave Flip", 100);
+        recordSale("Pasay", "AquaThirst Colorwave Flip", 140);
 
-        recordSale("Manila", "Aquaflask B", 90);
-        recordSale("Taguig", "Aquaflask B", 110);
-        recordSale("Pasay", "Aquaflask B", 130);
+        recordSale("Manila", "AquaThirst Dream 532ml", 90);
+        recordSale("Taguig", "AquaThirst Dream 532ml", 110);
+        recordSale("Pasay", "AquaThirst Dream 532ml", 130);
 
-        recordSale("Manila", "Aquaflask C", 150);
-        recordSale("Taguig", "Aquaflask C", 80);
-        recordSale("Pasay", "Aquaflask C", 95);
+        recordSale("Manila", "Cylinder Collections 24oz", 150);
+        recordSale("Taguig", "Cylinder Collections 24oz", 80);
+        recordSale("Pasay", "Cylinder Collections 24oz", 95);
         
         
-         recordSale("Manila", "Aquaflask D", 150);
-        recordSale("Taguig", "Aquaflask D", 80);
-        recordSale("Pasay", "Aquaflask D", 95);
+        recordSale("Manila", "Slate Cup Collection 16oz", 150);
+        recordSale("Taguig", "Slate Cup Collection 16oz", 80);
+        recordSale("Pasay", "Slate Cup Collection 16oz", 95);
+        
+        recordSale("Manila", "Tumbler Collection (30oz)", 150);
+        recordSale("Taguig", "Tumbler Collection (30oz)", 80);
+        recordSale("Pasay", "Tumbler Collection (30oz)", 95);
         
         
         
