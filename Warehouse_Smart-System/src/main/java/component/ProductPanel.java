@@ -30,6 +30,7 @@ import util.FontLoader;
 import com.mycompany.warehouse_smart.system.ProductSearch;
 import java.awt.Frame;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -136,10 +137,10 @@ public class ProductPanel extends javax.swing.JPanel {
  
  private void showProductDialog(ProductSearch p) {
     JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Product Details", true);
-    dialog.setSize(400, 400);
+    dialog.setSize(400, 250);
     dialog.setLayout(new BorderLayout(10,10));
     dialog.setLocationRelativeTo(this);
-
+    dialog.setBackground(Color.decode("#212121"));
     JLabel imgLabel = new JLabel();
     imgLabel.setHorizontalAlignment(SwingConstants.CENTER);
     imgLabel.setIcon(new ImageIcon(p.getImage().getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH)));
@@ -152,12 +153,24 @@ public class ProductPanel extends javax.swing.JPanel {
     detailsPanel.add(new JLabel("Status: " + p.getStatus()));
     detailsPanel.add(new JLabel("Location: " + p.getLocation()));
     detailsPanel.add(new JLabel("<html><p style='width:200px;'>Description: " + p.getDescription() + "</p></html>"));
-
+    
+    
     JPanel salePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    
     salePanel.add(new JLabel("Enter Sales:"));
     JTextField qtyField = new JTextField(5);
     salePanel.add(qtyField);
     detailsPanel.add(salePanel);
+   
+JPanel locationPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+locationPanel.add(new JLabel("Select Location:"));
+
+
+String[] locations = {"Pasay", "Manila", "Taguig"}; 
+JComboBox<String> locationComboBox = new JComboBox<>(locations);
+locationPanel.add(locationComboBox);
+detailsPanel.add(locationPanel);
+
 
     dialog.add(detailsPanel, BorderLayout.CENTER);
 

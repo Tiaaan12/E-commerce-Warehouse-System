@@ -14,7 +14,7 @@ public class Warehouse_SmartSystem {
     public static void main(String[] args) {
          java.awt.EventQueue.invokeLater(() -> {
              FlatDarculaLaf.setup();
-            new Dashboard().setVisible(true);
+            new Login().setVisible(true);
         });
     }
 }
