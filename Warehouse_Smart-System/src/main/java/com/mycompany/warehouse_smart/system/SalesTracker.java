@@ -14,12 +14,13 @@ import java.util.Map;
 public class SalesTracker {
  
     private Map<String, Map<String, Integer>> salesData;
-     private Map<String, ProductSearch> products;
+     private HashMap<String, ProductSearch> productMap;
      
     private int INITIAL_STOCK = 1015;
 
     public SalesTracker() {
         salesData = new HashMap<>();
+        productMap = new HashMap<>();
         
 
         addLocation("Manila");

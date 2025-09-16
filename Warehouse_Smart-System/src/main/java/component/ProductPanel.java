@@ -18,6 +18,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -26,29 +27,36 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import util.FontLoader;
+import com.mycompany.warehouse_smart.system.ProductSearch;
+import java.awt.Frame;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author cvdev
  */
 public class ProductPanel extends javax.swing.JPanel {
-
+    private HashMap<String, ProductSearch> productMap;
     /**
      * Creates new form ProductPanel
      */
     public ProductPanel() {
         initComponents();
+         productMap = new HashMap<>();
+       
         loadProducts();
        
 
     }
  private void loadProducts() {
     String[][] products = {
-        {"AquaThirst Colorwave Flip", "1012243", "100", "Makati"},
-        {"AquaThirst Dream 532ml", "1012249", "100", "Pasay & Makati"},
-        {"Cylinder Collections 24oz", "1012279", "100", "Manila"},
-        {"Slate Cup Collection 16oz", "1012347", "100", "Quezon"},
-        {"Tumbler Collection (30oz)", "1012445", "100", "Quezon"},
+        {"AquaThirst Colorwave Flip", "1012243", "100", "Manila"},
+        {"AquaThirst Dream 532ml", "1012249", "100", "Pasay & Taguig"},
+        {"Cylinder Collections 24oz", "1012279", "100", "Pasay"},
+        {"Slate Cup Collection 16oz", "1012347", "100", "Manila"},
+        {"Tumbler Collection (30oz)", "1012445", "100", "Taguig"},
     };
 
     jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
@@ -93,7 +101,64 @@ public class ProductPanel extends javax.swing.JPanel {
 
     jPanel1.revalidate();
     jPanel1.repaint();
+   
+    ProductSearch p1 = new ProductSearch("1012243", "AquaThirst Colorwave Flip", 
+            "Available", "Manila", "Stylish flip-top bottle", 
+            new ImageIcon(getClass().getResource("/1012243.png")));
+    ProductSearch p2 = new ProductSearch("1012249", "AquaThirst Dream 532ml", 
+            "Available", "Pasay & Taguig", "Dreamy hydration", 
+            new ImageIcon(getClass().getResource("/1012249.png")));
+   ProductSearch p3 = new ProductSearch("1012279", "Cylinder Collections 24oz", 
+            "Available", "Pasay", "Sleek 24oz cylinder bottle", 
+            new ImageIcon(getClass().getResource("/1012279.png")));
+   ProductSearch p4 = new ProductSearch("1012347", "Slate Cup Collection 16oz", 
+            "Available", "Manila", "Compact 16oz modern cup", 
+            new ImageIcon(getClass().getResource("/1012347.png")));
+   ProductSearch p5 = new ProductSearch("1012445", "Tumbler Collection (30oz)", 
+            "Available", "Taguig", "Durable 30oz insulated tumbler", 
+            new ImageIcon(getClass().getResource("/1012445.png")));
+
+    productMap.put(p1.getCode(), p1);
+    productMap.put(p2.getCode(), p2);
+    productMap.put(p3.getCode(), p3);
+    productMap.put(p4.getCode(), p4);
+    productMap.put(p5.getCode(), p5);
+
+    
+
 }
+ 
+ private void showProductDialog(ProductSearch p) {
+    JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Product Details", true);
+    dialog.setSize(400, 300);
+    dialog.setLayout(new BorderLayout(10,10));
+    dialog.setLocationRelativeTo(this);
+
+  
+    JLabel imgLabel = new JLabel();
+    imgLabel.setHorizontalAlignment(SwingConstants.CENTER);
+    imgLabel.setIcon(new ImageIcon(p.getImage().getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH)));
+    dialog.add(imgLabel, BorderLayout.WEST);
+
+    
+    JPanel detailsPanel = new JPanel();
+    detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.Y_AXIS));
+    detailsPanel.add(new JLabel("Name: " + p.getName()));
+    detailsPanel.add(new JLabel("Code: " + p.getCode()));
+    detailsPanel.add(new JLabel("Status: " + p.getStatus()));
+    detailsPanel.add(new JLabel("Location: " + p.getLocation()));
+    detailsPanel.add(new JLabel("<html><p style='width:200px;'>Description: " + p.getDescription() + "</p></html>"));
+    
+    dialog.add(detailsPanel, BorderLayout.CENTER);
+
+    
+    JButton closeBtn = new JButton("Close");
+    closeBtn.addActionListener(e -> dialog.dispose());
+    dialog.add(closeBtn, BorderLayout.SOUTH);
+
+    dialog.setVisible(true);
+}
+
 
 
 
@@ -290,14 +355,20 @@ private ImageIcon loadImage(String path, int w, int h) {
     }//GEN-LAST:event_searchTextInputMethodTextChanged
 
     private void searchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextActionPerformed
-        // TODO add your handling code here:
+       String code = searchText.getText().trim();
+    if (productMap.containsKey(code)) {
+        ProductSearch p = productMap.get(code);
+        showProductDialog(p);
+    } else {
+        JOptionPane.showMessageDialog(this, "Product not found!");
+    }
     }//GEN-LAST:event_searchTextActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         Point p = SwingUtilities.convertPoint(evt.getComponent(), evt.getPoint(), searchText);
 
         if (!searchText.getBounds().contains(p)) {
-            searchText.transferFocus(); // remove focus from search field
+            searchText.transferFocus(); 
         }
     }//GEN-LAST:event_formMouseClicked
 

@@ -19,6 +19,7 @@ com\mycompany\warehouse_smart\system\Products.class
 com\mycompany\warehouse_smart\system\Products$3.class
 com\mycompany\warehouse_smart\system\Dashboard$1.class
 com\mycompany\warehouse_smart\system\Products$6.class
+com\mycompany\warehouse_smart\system\ProductSearch.class
 component\ProductPanel.class
 com\mycompany\warehouse_smart\system\Dashboard$4.class
 com\mycompany\warehouse_smart\system\Dashboard$7.class
