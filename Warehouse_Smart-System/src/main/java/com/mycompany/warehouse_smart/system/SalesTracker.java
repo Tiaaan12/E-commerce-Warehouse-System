@@ -118,7 +118,7 @@ public int getRemainingProducts() {
     return INITIAL_STOCK - totalSold;
 }
 
-// total quantity ever added
+
 private int getTotalAddedProducts() {
     return salesData.values().stream()
         .flatMap(m -> m.values().stream())
