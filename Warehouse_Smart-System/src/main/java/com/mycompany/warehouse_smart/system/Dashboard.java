@@ -31,6 +31,9 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import component.LocationPanel;
 import component.ProductPanel;
+import component.HistoryPanel;
+import component.ReportsPanel;
+        
 
 
 import javax.swing.*;
@@ -47,6 +50,8 @@ public class Dashboard extends javax.swing.JFrame {
    private int mouseX, mouseY;
    private ProductPanel productPanel;
    private LocationPanel locationPanel;
+   private HistoryPanel historyPanel;
+   private ReportsPanel reportsPanel;
     /**
      * Creates new form Dashboard
      */
@@ -62,6 +67,10 @@ public class Dashboard extends javax.swing.JFrame {
          locationPanel = new LocationPanel();
          locationPanel.setOpaque(false);
          jPanel17.add(locationPanel, "Location");
+         historyPanel = new HistoryPanel();
+        jPanel17.add(historyPanel, "History");
+         reportsPanel = new ReportsPanel();
+         jPanel17.add(reportsPanel, "Reports");
    CardLayout cl = (CardLayout) jPanel17.getLayout();
     cl.show(jPanel17, "Dashboard");
     
@@ -100,6 +109,9 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTxtTime = new javax.swing.JLabel();
         jTxtDate = new javax.swing.JLabel();
+        jPanel18 = new RoundPanel(20);
+        jLabel24 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
         dashboardPanel1 = new component.DashboardPanel();
 
@@ -153,7 +165,7 @@ public class Dashboard extends javax.swing.JFrame {
                 simulateBtnActionPerformed(evt);
             }
         });
-        jPanel2.add(simulateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
+        jPanel2.add(simulateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, -1, -1));
 
         jPanel12.setBackground(Color.decode("#5541CB"));
         jPanel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -323,6 +335,43 @@ public class Dashboard extends javax.swing.JFrame {
         jTxtDate.setText("jLabel4");
         jPanel2.add(jTxtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 180, -1));
 
+        jPanel18.setBackground(Color.decode("#212121"));
+        jPanel18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel18MouseClicked(evt);
+            }
+        });
+
+        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vector-1 (1).png"))); // NOI18N
+
+        jLabel5.setFont(dmSans);
+        jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel6.setForeground(Color.decode("#D6D6D6"));
+        jLabel6.setText("History");
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel24)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel24))
+                .addGap(0, 5, Short.MAX_VALUE))
+        );
+
+        jPanel2.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 174, 40));
+
         jPanel17.setBackground(Color.decode("#1A1A1A"));
         jPanel17.setOpaque(false);
         jPanel17.setPreferredSize(new java.awt.Dimension(842, 567));
@@ -398,6 +447,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel12.setBackground(Color.decode("#212121"));
         jPanel14.setBackground(Color.decode("#212121"));
         jPanel16.setBackground(Color.decode("#212121"));
+        jPanel18.setBackground(Color.decode("#212121"));
 
     }//GEN-LAST:event_jPanel15MouseClicked
 
@@ -408,6 +458,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel15.setBackground(Color.decode("#212121"));
         jPanel14.setBackground(Color.decode("#212121"));
         jPanel16.setBackground(Color.decode("#212121"));
+        jPanel18.setBackground(Color.decode("#212121"));
 
     }//GEN-LAST:event_jPanel12MouseClicked
     
@@ -418,16 +469,31 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel15.setBackground(Color.decode("#212121"));
         jPanel12.setBackground(Color.decode("#212121"));
         jPanel16.setBackground(Color.decode("#212121"));
+        jPanel18.setBackground(Color.decode("#212121"));
         
     }//GEN-LAST:event_jPanel14MouseClicked
 
     private void jPanel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel16MouseClicked
+    CardLayout cl = (CardLayout) jPanel17.getLayout();
+    cl.show(jPanel17, "Reports");
     jPanel16.setBackground(Color.decode("#5541CB"));
     jPanel15.setBackground(Color.decode("#212121"));
     jPanel12.setBackground(Color.decode("#212121"));
     jPanel14.setBackground(Color.decode("#212121"));
+    jPanel18.setBackground(Color.decode("#212121"));
       
     }//GEN-LAST:event_jPanel16MouseClicked
+
+    private void jPanel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseClicked
+    CardLayout cl = (CardLayout) jPanel17.getLayout();
+    cl.show(jPanel17, "History");
+    jPanel18.setBackground(Color.decode("#5541CB"));
+    jPanel16.setBackground(Color.decode("#212121"));
+    jPanel15.setBackground(Color.decode("#212121"));
+    jPanel12.setBackground(Color.decode("#212121"));
+    jPanel14.setBackground(Color.decode("#212121"));
+    
+    }//GEN-LAST:event_jPanel18MouseClicked
     public void setTime() {
         new Thread(new Runnable() {
             @Override
@@ -503,8 +569,10 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelProduct;
@@ -514,6 +582,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel jTxtDate;
     private javax.swing.JLabel jTxtTime;

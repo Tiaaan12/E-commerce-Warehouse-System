@@ -29,13 +29,14 @@ public class LocationPanel extends javax.swing.JPanel {
     }
     
     public void showManila() {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), true);
-    dialog.setSize(700, 450);
+    JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), true);
+    dialog.setSize(900, 600);
     dialog.setLayout(new BorderLayout(10,10));
     dialog.setLocationRelativeTo(this);
     dialog.setBackground(Color.decode("#212121"));
     
- JLabel imgLabel = new JLabel(new ImageIcon(getClass().getResource("/manilaWS(1).png")));
+ JLabel imgLabel = new JLabel();
+ imgLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/manilaWS (1).png"))); 
      dialog.add(imgLabel);
      dialog.setVisible(true);
      
