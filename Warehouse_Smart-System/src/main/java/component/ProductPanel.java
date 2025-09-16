@@ -137,7 +137,7 @@ public class ProductPanel extends javax.swing.JPanel {
  
  private void showProductDialog(ProductSearch p) {
     JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Product Details", true);
-    dialog.setSize(400, 250);
+    dialog.setSize(430, 280);
     dialog.setLayout(new BorderLayout(10,10));
     dialog.setLocationRelativeTo(this);
     dialog.setBackground(Color.decode("#212121"));
@@ -238,10 +238,12 @@ private ImageIcon loadImage(String path, int w, int h) {
         jLabel11 = new javax.swing.JLabel();
         jPanel13 = new Styledpanel();
         jLabel4 = new javax.swing.JLabel();
-        searchText = new com.mycompany.warehouse_smart.system.RoundTextField(20);
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jLabel1 = new javax.swing.JLabel();
+        searchText = new com.mycompany.warehouse_smart.system.RoundTextField(20);
 
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -272,6 +274,36 @@ private ImageIcon loadImage(String path, int w, int h) {
         jPanel13.add(jLabel4);
         jLabel4.setBounds(10, 10, 24, 25);
 
+        Font inter = FontLoader.loadFont("resources/fonts/Inter_28pt-ExtraBold.ttf", 25f);
+        jLabel7.setFont(inter);
+        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Product");
+
+        jScrollPane1.setViewportView(jPanel1);
+        jScrollPane1.setBackground(Color.decode("#1A1A1A"));
+        jScrollPane1.setForeground(Color.decode("#1A1A1A"));
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setOpaque(false);
+
+        jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
+        jPanel1.setBackground(Color.decode("#1A1A1A"));
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+        jScrollPane1.setViewportView(jPanel1);
+
+        jLayeredPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search-icon-png-4 (1).png"))); // NOI18N
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.setEnabled(false);
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        jLayeredPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 10, 20, 30));
+
         searchText.setBackground(new Color(0,0,0,0));
         searchText.setForeground(new java.awt.Color(255, 255, 255));
         searchText.setText("Search");
@@ -296,24 +328,7 @@ private ImageIcon loadImage(String path, int w, int h) {
                 searchTextActionPerformed(evt);
             }
         });
-
-        Font inter = FontLoader.loadFont("resources/fonts/Inter_28pt-ExtraBold.ttf", 25f);
-        jLabel7.setFont(inter);
-        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Product");
-
-        jScrollPane1.setViewportView(jPanel1);
-        jScrollPane1.setBackground(Color.decode("#1A1A1A"));
-        jScrollPane1.setForeground(Color.decode("#1A1A1A"));
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setOpaque(false);
-
-        jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
-        jPanel1.setBackground(Color.decode("#1A1A1A"));
-        jPanel1.setOpaque(false);
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
-        jScrollPane1.setViewportView(jPanel1);
+        jLayeredPane1.add(searchText, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 370, 37));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -343,13 +358,13 @@ private ImageIcon loadImage(String path, int w, int h) {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(157, 157, 157))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(106, 106, 106)))
+                                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel11)))
                         .addContainerGap())))
@@ -361,7 +376,7 @@ private ImageIcon loadImage(String path, int w, int h) {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel7))
                         .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -379,7 +394,7 @@ private ImageIcon loadImage(String path, int w, int h) {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -402,13 +417,14 @@ private ImageIcon loadImage(String path, int w, int h) {
     }//GEN-LAST:event_searchTextInputMethodTextChanged
 
     private void searchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextActionPerformed
-       String code = searchText.getText().trim();
-    if (productMap.containsKey(code)) {
-        ProductSearch p = productMap.get(code);
-        showProductDialog(p);
-    } else {
+        String code = searchText.getText().trim();
+        if (productMap.containsKey(code)) {
+            ProductSearch p = productMap.get(code);
+            showProductDialog(p);
+            }     
+        else {
         JOptionPane.showMessageDialog(this, "Product not found!");
-    }
+            }
     }//GEN-LAST:event_searchTextActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -419,8 +435,20 @@ private ImageIcon loadImage(String path, int w, int h) {
         }
     }//GEN-LAST:event_formMouseClicked
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+      String code = searchText.getText().trim();
+        if (productMap.containsKey(code)) {
+            ProductSearch p = productMap.get(code);
+            showProductDialog(p);
+            }     
+        else {
+        JOptionPane.showMessageDialog(this, "Product not found!");
+            }
+    }//GEN-LAST:event_jLabel1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -428,6 +456,7 @@ private ImageIcon loadImage(String path, int w, int h) {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JScrollPane jScrollPane1;

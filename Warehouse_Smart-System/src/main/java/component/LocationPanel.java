@@ -5,8 +5,14 @@
 package component;
 
 import com.mycompany.warehouse_smart.system.Styledpanel;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 import util.FontLoader;
 
 /**
@@ -20,6 +26,20 @@ public class LocationPanel extends javax.swing.JPanel {
      */
     public LocationPanel() {
         initComponents();
+    }
+    
+    public void showManila() {
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), true);
+    dialog.setSize(700, 450);
+    dialog.setLayout(new BorderLayout(10,10));
+    dialog.setLocationRelativeTo(this);
+    dialog.setBackground(Color.decode("#212121"));
+    
+ JLabel imgLabel = new JLabel(new ImageIcon(getClass().getResource("/manilaWS(1).png")));
+     dialog.add(imgLabel);
+     dialog.setVisible(true);
+     
+     
     }
 
     /**
@@ -70,11 +90,16 @@ public class LocationPanel extends javax.swing.JPanel {
 
         ManilaLoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pin.png"))); // NOI18N
         ManilaLoc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ManilaLoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ManilaLocMouseClicked(evt);
+            }
+        });
         jLayeredPane1.add(ManilaLoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Map.png"))); // NOI18N
         jLabel1.setText("jLabel1");
-        jLayeredPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 768, 463));
+        jLayeredPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 750, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -82,17 +107,16 @@ public class LocationPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 556, Short.MAX_VALUE)
-                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel11)
-                        .addGap(19, 19, 19))))
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,9 +128,13 @@ public class LocationPanel extends javax.swing.JPanel {
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ManilaLocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ManilaLocMouseClicked
+        showManila();
+    }//GEN-LAST:event_ManilaLocMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
