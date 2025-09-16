@@ -56,7 +56,7 @@ public class Dashboard extends javax.swing.JFrame {
         dashboardPanel1.updateChart();
         
          jPanel17.add(dashboardPanel1, "Dashboard");
-         productPanel = new ProductPanel();
+         productPanel = new ProductPanel(dashboardPanel1);
          productPanel.setOpaque(false);
          jPanel17.add(productPanel, "Product");
          locationPanel = new LocationPanel();

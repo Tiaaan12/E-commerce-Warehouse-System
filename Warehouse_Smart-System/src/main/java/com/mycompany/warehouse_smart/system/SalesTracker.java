@@ -22,7 +22,7 @@ public class SalesTracker {
         salesData = new HashMap<>();
         productMap = new HashMap<>();
         
-
+        
         addLocation("Manila");
         addLocation("Taguig");
         addLocation("Pasay");

@@ -32,6 +32,7 @@ import java.awt.Frame;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -39,16 +40,21 @@ import javax.swing.JOptionPane;
  */
 public class ProductPanel extends javax.swing.JPanel {
     private HashMap<String, ProductSearch> productMap;
+    private DashboardPanel dashboardPanel;
     /**
      * Creates new form ProductPanel
      */
-    public ProductPanel() {
+    public ProductPanel(DashboardPanel dashboardPanel) {
+        
         initComponents();
+        this.dashboardPanel = dashboardPanel;
          productMap = new HashMap<>();
-       
+         
         loadProducts();
-       
-
+      
+    }
+ private void sellProduct(String location, String product, int qty) {
+        dashboardPanel.recordSale(location, product, qty);
     }
  private void loadProducts() {
     String[][] products = {
@@ -130,17 +136,15 @@ public class ProductPanel extends javax.swing.JPanel {
  
  private void showProductDialog(ProductSearch p) {
     JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Product Details", true);
-    dialog.setSize(400, 300);
+    dialog.setSize(400, 400);
     dialog.setLayout(new BorderLayout(10,10));
     dialog.setLocationRelativeTo(this);
 
-  
     JLabel imgLabel = new JLabel();
     imgLabel.setHorizontalAlignment(SwingConstants.CENTER);
     imgLabel.setIcon(new ImageIcon(p.getImage().getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH)));
     dialog.add(imgLabel, BorderLayout.WEST);
 
-    
     JPanel detailsPanel = new JPanel();
     detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.Y_AXIS));
     detailsPanel.add(new JLabel("Name: " + p.getName()));
@@ -148,17 +152,47 @@ public class ProductPanel extends javax.swing.JPanel {
     detailsPanel.add(new JLabel("Status: " + p.getStatus()));
     detailsPanel.add(new JLabel("Location: " + p.getLocation()));
     detailsPanel.add(new JLabel("<html><p style='width:200px;'>Description: " + p.getDescription() + "</p></html>"));
-    
+
+    JPanel salePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    salePanel.add(new JLabel("Enter Sales:"));
+    JTextField qtyField = new JTextField(5);
+    salePanel.add(qtyField);
+    detailsPanel.add(salePanel);
+
     dialog.add(detailsPanel, BorderLayout.CENTER);
 
-    
+    JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+    JButton saveBtn = new JButton("Record Sale");
     JButton closeBtn = new JButton("Close");
+
+    btnPanel.add(saveBtn);
+    btnPanel.add(closeBtn);
+    dialog.add(btnPanel, BorderLayout.SOUTH);
+
+    saveBtn.addActionListener(e -> {
+        try {
+            int qty = Integer.parseInt(qtyField.getText().trim());
+            if (qty <= 0) {
+                JOptionPane.showMessageDialog(dialog, "Please enter a valid quantity.");
+                return;
+            }
+
+            if (dashboardPanel != null) {
+                dashboardPanel.recordSale(p.getLocation(), p.getName(), qty); 
+            }
+
+            JOptionPane.showMessageDialog(dialog, "Sale recorded successfully!");
+            dialog.dispose();
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(dialog, "Invalid number entered.");
+        }
+    });
+
     closeBtn.addActionListener(e -> dialog.dispose());
-    dialog.add(closeBtn, BorderLayout.SOUTH);
 
     dialog.setVisible(true);
 }
-
 
 
 
