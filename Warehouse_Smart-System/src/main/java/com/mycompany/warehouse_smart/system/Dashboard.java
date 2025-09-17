@@ -59,16 +59,16 @@ public class Dashboard extends javax.swing.JFrame {
         initComponents();
           tracker = new SalesTracker();
         dashboardPanel1.updateChart();
-        
+        historyPanel = new HistoryPanel();
+        jPanel17.add(historyPanel, "History");
          jPanel17.add(dashboardPanel1, "Dashboard");
-         productPanel = new ProductPanel(dashboardPanel1);
+         productPanel = new ProductPanel(dashboardPanel1, historyPanel);
          productPanel.setOpaque(false);
          jPanel17.add(productPanel, "Product");
          locationPanel = new LocationPanel();
          locationPanel.setOpaque(false);
          jPanel17.add(locationPanel, "Location");
-         historyPanel = new HistoryPanel();
-        jPanel17.add(historyPanel, "History");
+         
          reportsPanel = new ReportsPanel();
          jPanel17.add(reportsPanel, "Reports");
    CardLayout cl = (CardLayout) jPanel17.getLayout();

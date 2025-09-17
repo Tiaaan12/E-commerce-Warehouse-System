@@ -42,13 +42,15 @@ import javax.swing.JTextField;
 public class ProductPanel extends javax.swing.JPanel {
     private HashMap<String, ProductSearch> productMap;
     private DashboardPanel dashboardPanel;
+    private HistoryPanel historyPanel;
     /**
      * Creates new form ProductPanel
      */
-    public ProductPanel(DashboardPanel dashboardPanel) {
-        
-        initComponents();
+    public ProductPanel(DashboardPanel dashboardPanel, HistoryPanel historyPanel) {
         this.dashboardPanel = dashboardPanel;
+        this.historyPanel = historyPanel;
+        initComponents();
+        
          productMap = new HashMap<>();
          
         loadProducts();
@@ -191,6 +193,8 @@ detailsPanel.add(locationPanel);
             }
 
             if (dashboardPanel != null) {
+                historyPanel.addSaleRecord(p.getName(), p.getLocation(), qty);
+
                 dashboardPanel.recordSale(p.getLocation(), p.getName(), qty); 
             }
 
