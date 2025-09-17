@@ -29,7 +29,7 @@ public class Login extends javax.swing.JFrame {
     String username = "Christian";
     String password = "nationalu";
 
-    // Convert password fields to Strings
+   
     String enteredPassword = new String(jPassword.getPassword());
     String enteredConfirm = new String(jConfirm.getPassword());
 

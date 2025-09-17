@@ -184,27 +184,30 @@ detailsPanel.add(locationPanel);
     btnPanel.add(closeBtn);
     dialog.add(btnPanel, BorderLayout.SOUTH);
 
-    saveBtn.addActionListener(e -> {
-        try {
-            int qty = Integer.parseInt(qtyField.getText().trim());
-            if (qty <= 0) {
-                JOptionPane.showMessageDialog(dialog, "Please enter a valid quantity.");
-                return;
-            }
-
-            if (dashboardPanel != null) {
-                historyPanel.addSaleRecord(p.getName(), p.getLocation(), qty);
-
-                dashboardPanel.recordSale(p.getLocation(), p.getName(), qty); 
-            }
-
-            JOptionPane.showMessageDialog(dialog, "Sale recorded successfully!");
-            dialog.dispose();
-
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(dialog, "Invalid number entered.");
+   saveBtn.addActionListener(e -> {
+    try {
+        int qty = Integer.parseInt(qtyField.getText().trim());
+        if (qty <= 0) {
+            JOptionPane.showMessageDialog(dialog, "Please enter a valid quantity.");
+            return;
         }
-    });
+
+        // Get the location from the combo box
+        String selectedLocation = (String) locationComboBox.getSelectedItem();
+
+        if (dashboardPanel != null) {
+            historyPanel.addSaleRecord(p.getName(), selectedLocation, qty);
+            dashboardPanel.recordSale(selectedLocation, p.getName(), qty);
+        }
+
+        JOptionPane.showMessageDialog(dialog, "Sale recorded successfully!");
+        dialog.dispose();
+
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(dialog, "Invalid number entered.");
+    }
+});
+
 
     closeBtn.addActionListener(e -> dialog.dispose());
 

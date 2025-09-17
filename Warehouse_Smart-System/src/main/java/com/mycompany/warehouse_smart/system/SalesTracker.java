@@ -10,17 +10,28 @@ package com.mycompany.warehouse_smart.system;
  */
 import java.util.HashMap;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 public class SalesTracker {
  
     private Map<String, Map<String, Integer>> salesData;
      private HashMap<String, ProductSearch> productMap;
+     private Map<String, Integer> productTotals;
+     private PriorityQueue<Map.Entry<String, Integer>> productHeap;
+     private Map<String, Integer> locationTotals;
+     private PriorityQueue<Map.Entry<String, Integer>> locationHeap;
      
+    
     private int INITIAL_STOCK = 1015;
 
     public SalesTracker() {
         salesData = new HashMap<>();
         productMap = new HashMap<>();
+        productTotals = new HashMap<>();
+        productHeap = new PriorityQueue<>((a, b) -> b.getValue() - a.getValue());
+        locationTotals = new HashMap<>();
+        locationHeap = new PriorityQueue<>((a, b) -> b.getValue() - a.getValue());
+
         
         
         addLocation("Manila");
@@ -70,48 +81,35 @@ public class SalesTracker {
     }
     
 
-    public void recordSale(String location, String product, int quantity) {
-        addLocation(location);
-        addProduct(product);
-        int current = salesData.get(location).get(product);
-        salesData.get(location).put(product, current + quantity);
-    }
+  public void recordSale(String location, String product, int qty) {
+   
+    salesData.putIfAbsent(location, new HashMap<>());
+    Map<String, Integer> productMap = salesData.get(location);
+    productMap.put(product, productMap.getOrDefault(product, 0) + qty);
+
+   
+    productTotals.put(product, productTotals.getOrDefault(product, 0) + qty);
+    productHeap.clear();
+    productHeap.addAll(productTotals.entrySet());
+
+ 
+    locationTotals.put(location, locationTotals.getOrDefault(location, 0) + qty);
+    locationHeap.clear();
+    locationHeap.addAll(locationTotals.entrySet());
+}
+
 
     public Map<String, Map<String, Integer>> getSalesData() {
         return salesData;
     }
 
-public String getTopLocation() {
-    String bestLocation = null;
-    int maxLocSales = 0;
-    for (String location : salesData.keySet()) {
-        int total = salesData.get(location).values().stream().mapToInt(Integer::intValue).sum();
-        if (total > maxLocSales) {
-            maxLocSales = total;
-            bestLocation = location;
-        }
-    }
-    return bestLocation;
+public String getTopItem() {
+    return productHeap.isEmpty() ? "None" : productHeap.peek().getKey();
 }
 
-public String getTopProduct() {
-    Map<String, Integer> productTotals = new HashMap<>();
-    for (Map<String, Integer> productMap : salesData.values()) {
-        for (Map.Entry<String, Integer> e : productMap.entrySet()) {
-            productTotals.put(e.getKey(), productTotals.getOrDefault(e.getKey(), 0) + e.getValue());
-        }
-    }
-    String bestProduct = null;
-    int maxProdSales = 0;
-    for (Map.Entry<String, Integer> e : productTotals.entrySet()) {
-        if (e.getValue() > maxProdSales) {
-            maxProdSales = e.getValue();
-            bestProduct = e.getKey();
-        }
-    }
-    return bestProduct;
+public String getHotLocation() {
+    return locationHeap.isEmpty() ? "None" : locationHeap.peek().getKey();
 }
-
 public int getRemainingProducts() {
    
     int totalSold = getTotalSales();
