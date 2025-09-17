@@ -413,9 +413,9 @@ public class Dashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void simulateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulateBtnActionPerformed
-        dashboardPanel1.recordSale("Manila", "AquaThirst Colorwave Flip", 30); 
-        dashboardPanel1.recordSale("Manila", "AquaThirst Dream 532ml", 50); 
-        dashboardPanel1.recordSale("Pasay", "Cylinder Collections 24oz", 50);
+        dashboardPanel1.recordSale("Manila", "AquaThirst Colorwave", 30); 
+        dashboardPanel1.recordSale("Manila", "AquaThirst Dream", 50); 
+        dashboardPanel1.recordSale("Pasay", "Cylinder Collections", 50);
      dashboardPanel1.updateChart();
         
     

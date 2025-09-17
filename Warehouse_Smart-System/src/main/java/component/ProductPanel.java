@@ -36,7 +36,10 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import com.mycompany.warehouse_smart.system.SalesTracker;
+import java.awt.Cursor;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Map;
 
 /**
  *
@@ -58,42 +61,41 @@ public class ProductPanel extends javax.swing.JPanel {
         tracker = new SalesTracker();
          productMap = new HashMap<>();
           products = new ArrayList<>();
-     // ✅ Full product list (status = "100")
-    ProductSearch p1 = new ProductSearch("1012243", "AquaThirst Colorwave Flip", 
+ 
+    ProductSearch p1 = new ProductSearch("1012243", "AquaThirst Colorwave", 
             "100", "Manila", "Stylish flip-top bottle", 
             new ImageIcon(getClass().getResource("/1012243.png")));
 
-    ProductSearch p2 = new ProductSearch("1012249", "AquaThirst Dream 532ml", 
+    ProductSearch p2 = new ProductSearch("1012249", "AquaThirst Dream", 
             "100", "Pasay & Taguig", "Dreamy hydration", 
             new ImageIcon(getClass().getResource("/1012249.png")));
 
-    ProductSearch p3 = new ProductSearch("1012279", "Cylinder Collections 24oz", 
+    ProductSearch p3 = new ProductSearch("1012279", "Cylinder Collections", 
             "100", "Pasay", "Sleek 24oz cylinder bottle", 
             new ImageIcon(getClass().getResource("/1012279.png")));
 
-    ProductSearch p4 = new ProductSearch("1012347", "Slate Cup Collection 16oz", 
+    ProductSearch p4 = new ProductSearch("1012347", "Slate Cup Collection", 
             "100", "Manila", "Compact 16oz modern cup", 
             new ImageIcon(getClass().getResource("/1012347.png")));
 
-    ProductSearch p5 = new ProductSearch("1012445", "Tumbler Collection (30oz)", 
+    ProductSearch p5 = new ProductSearch("1012445", "Tumbler Collection", 
             "100", "Taguig", "Durable 30oz insulated tumbler", 
             new ImageIcon(getClass().getResource("/1012445.png")));
 
-    // ✅ Add to list
+
     products.add(p4);
     products.add(p2);
     products.add(p1);
     products.add(p5);
     products.add(p3);
 
-    // ✅ Add to map (for search)
     productMap.put(p1.getCode(), p1);
     productMap.put(p2.getCode(), p2);
     productMap.put(p3.getCode(), p3);
     productMap.put(p4.getCode(), p4);
     productMap.put(p5.getCode(), p5);
 
-    // ✅ Load products in default (original order)
+ 
     loadProducts(products);
 
       
@@ -102,7 +104,7 @@ public class ProductPanel extends javax.swing.JPanel {
         dashboardPanel.recordSale(location, product, qty);
     }
  private void loadProducts(List<ProductSearch> list) {
-    jPanel1.removeAll(); // clear previous
+    jPanel1.removeAll(); 
 
     jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
 
@@ -111,11 +113,15 @@ public class ProductPanel extends javax.swing.JPanel {
         row.setBackground(new java.awt.Color(40, 40, 40));
         row.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Image (product image)
+        
         JLabel imgLabel = new JLabel(p.getImage());
+        imgLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+       
         row.add(imgLabel, BorderLayout.WEST);
+        
+        
 
-        // Details
+      
         JPanel details = new JPanel(new GridLayout(1, 4, 10, 20));
         details.setBackground(new java.awt.Color(40, 40, 40));
 
@@ -126,7 +132,7 @@ public class ProductPanel extends javax.swing.JPanel {
                 getClass().getResource("/barcodes/" + p.getCode() + ".png")));
         codeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel statusLabel = new JLabel(p.getStatus()); // stays "100"
+        JLabel statusLabel = new JLabel(p.getStatus()); 
         statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
         statusLabel.setForeground(Color.GREEN);
 
@@ -148,11 +154,26 @@ public class ProductPanel extends javax.swing.JPanel {
     jPanel1.repaint();
 }
 
- private void sortAlphabetical() {
-    List<ProductSearch> sortedList = new ArrayList<>(products);
-    sortedList.sort((a, b) -> a.getName().compareToIgnoreCase(b.getName()));
-    loadProducts(sortedList);
+    
+ private void reloadProductsAlphabetical() {
+    // 1. Get sorted product names from SalesTracker (Insertion Sort result)
+    List<String> sortedNames = tracker.getSortedProducts();
+
+    // 2. Map names back to ProductSearch objects
+    List<ProductSearch> sortedProducts = new ArrayList<>();
+    for (String name : sortedNames) {
+        for (ProductSearch ps : products) { // products = your product list
+            if (ps.getName().equals(name)) {
+                sortedProducts.add(ps);
+                break;
+            }
+        }
+    }
+
+    // 3. Reload UI
+    loadProducts(sortedProducts);
 }
+
 
  
  private void showProductDialog(ProductSearch p) {
@@ -290,6 +311,7 @@ private ImageIcon loadImage(String path, int w, int h) {
         jLabel14.setText("Location");
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Untitled (60 x 60 px).png"))); // NOI18N
+        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel13.setBackground(Color.decode("#212121"));
         jPanel13.setPreferredSize(new java.awt.Dimension(177, 175));
@@ -328,7 +350,7 @@ private ImageIcon loadImage(String path, int w, int h) {
                 jLabel1MouseClicked(evt);
             }
         });
-        jLayeredPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 10, 20, 30));
+        jLayeredPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 20, 30));
 
         searchText.setBackground(new Color(0,0,0,0));
         searchText.setForeground(new java.awt.Color(255, 255, 255));
@@ -368,18 +390,19 @@ private ImageIcon loadImage(String path, int w, int h) {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(156, 156, 156)
-                .addComponent(jLabel6)
-                .addGap(130, 130, 130)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel13)
-                .addGap(115, 115, 115)
-                .addComponent(jLabel14)
-                .addGap(81, 81, 81))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel6)
+                        .addGap(130, 130, 130)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel13)
+                        .addGap(115, 115, 115)
+                        .addComponent(jLabel14)
+                        .addGap(81, 81, 81))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,8 +415,6 @@ private ImageIcon loadImage(String path, int w, int h) {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
@@ -413,21 +434,21 @@ private ImageIcon loadImage(String path, int w, int h) {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel7)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel7))
                         .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)))
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel12)
+                        .addComponent(jLabel13)
+                        .addComponent(jLabel14))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -462,6 +483,8 @@ private ImageIcon loadImage(String path, int w, int h) {
         else {
         JOptionPane.showMessageDialog(this, "Product not found!");
             }
+        searchText.setText("Search");
+            searchText.setForeground(Color.GRAY);
     }//GEN-LAST:event_searchTextActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -486,9 +509,13 @@ private ImageIcon loadImage(String path, int w, int h) {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         String selected = (String) jComboBox1.getSelectedItem();
         if ("Alphabetical".equals(selected)) {
-            sortAlphabetical();
-        } else {
-            loadProducts(products); // Default = original order
+            reloadProductsAlphabetical();
+        } 
+        else if("By Sales".equals(selected)) {
+            
+        }
+         else {
+            loadProducts(products); 
         }
  
     }//GEN-LAST:event_jComboBox1ActionPerformed

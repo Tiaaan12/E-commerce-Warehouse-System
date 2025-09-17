@@ -41,33 +41,33 @@ public class SalesTracker {
         addLocation("Taguig");
         addLocation("Pasay");
 
-        addProduct("AquaThirst Colorwave Flip");
-        addProduct("AquaThirst Dream 532ml");
-        addProduct("Cylinder Collections 24oz");
-        addProduct("Slate Cup Collection 16oz");
-        addProduct("Tumbler Collection (30oz)");
+        addProduct("AquaThirst Colorwave");
+        addProduct("AquaThirst Dream");
+        addProduct("Cylinder Collections");
+        addProduct("Slate Cup Collection");
+        addProduct("Tumbler Collection");
 
         
-        recordSale("Manila", "AquaThirst Colorwave Flip", 120);
-        recordSale("Taguig", "AquaThirst Colorwave Flip", 100);
-        recordSale("Pasay", "AquaThirst Colorwave Flip", 140);
+        recordSale("Manila", "AquaThirst Colorwave", 120);
+        recordSale("Taguig", "AquaThirst Colorwave", 100);
+        recordSale("Pasay", "AquaThirst Colorwave", 140);
 
-        recordSale("Manila", "AquaThirst Dream 532ml", 90);
-        recordSale("Taguig", "AquaThirst Dream 532ml", 110);
-        recordSale("Pasay", "AquaThirst Dream 532ml", 130);
+        recordSale("Manila", "AquaThirst Dream", 90);
+        recordSale("Taguig", "AquaThirst Dream", 110);
+        recordSale("Pasay", "AquaThirst Dream", 130);
 
-        recordSale("Manila", "Cylinder Collections 24oz", 150);
-        recordSale("Taguig", "Cylinder Collections 24oz", 80);
-        recordSale("Pasay", "Cylinder Collections 24oz", 95);
+        recordSale("Manila", "Cylinder Collections", 150);
+        recordSale("Taguig", "Cylinder Collections", 80);
+        recordSale("Pasay", "Cylinder Collections", 95);
         
         
-        recordSale("Manila", "Slate Cup Collection 16oz", 150);
-        recordSale("Taguig", "Slate Cup Collection 16oz", 80);
-        recordSale("Pasay", "Slate Cup Collection 16oz", 95);
+        recordSale("Manila", "Slate Cup Collection", 150);
+        recordSale("Taguig", "Slate Cup Collection", 80);
+        recordSale("Pasay", "Slate Cup Collection", 95);
         
-        recordSale("Manila", "Tumbler Collection (30oz)", 150);
-        recordSale("Taguig", "Tumbler Collection (30oz)", 80);
-        recordSale("Pasay", "Tumbler Collection (30oz)", 95);
+        recordSale("Manila", "Tumbler Collection", 150);
+        recordSale("Taguig", "Tumbler Collection", 80);
+        recordSale("Pasay", "Tumbler Collection", 95);
         
         
         
@@ -119,10 +119,9 @@ public List<String> getSortedProducts() {
         products.addAll(map.keySet());
     }
 
-    // Remove duplicates
+
     products = new ArrayList<>(new HashSet<>(products));
 
-    // Insertion Sort
     for (int i = 1; i < products.size(); i++) {
         String key = products.get(i);
         int j = i - 1;
