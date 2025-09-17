@@ -9,6 +9,7 @@ com\mycompany\warehouse_smart\system\Login$2.class
 com\mycompany\warehouse_smart\system\RoundTextField.class
 com\mycompany\warehouse_smart\system\RoundedPanel.class
 component\ProductPanel$3.class
+component\ProductPanel$6.class
 com\mycompany\warehouse_smart\system\Products$3.class
 com\mycompany\warehouse_smart\system\Products$6.class
 com\mycompany\warehouse_smart\system\Dashboard$4.class

@@ -125,8 +125,7 @@ public class DashboardPanel extends javax.swing.JPanel {
 }
     
     private void updateCounters() {
-    jSalesCounter.setText(String.valueOf(tracker.getTotalSales()));
-    jProductCounter.setText(String.valueOf(tracker.getRemainingProducts()));
+   
     jTopLocation.setText(tracker.getHotLocation());
     jTopProduct.setText(tracker.getTopItem());
 }

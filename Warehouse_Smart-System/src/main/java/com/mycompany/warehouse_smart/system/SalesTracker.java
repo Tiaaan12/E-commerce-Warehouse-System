@@ -8,7 +8,10 @@ package com.mycompany.warehouse_smart.system;
  *
  * @author cvdev
  */
+import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.PriorityQueue;
 
@@ -110,25 +113,29 @@ public String getTopItem() {
 public String getHotLocation() {
     return locationHeap.isEmpty() ? "None" : locationHeap.peek().getKey();
 }
-public int getRemainingProducts() {
-   
-    int totalSold = getTotalSales();
-    return INITIAL_STOCK - totalSold;
+public List<String> getSortedProducts() {
+    List<String> products = new ArrayList<>();
+    for (Map<String, Integer> map : salesData.values()) {
+        products.addAll(map.keySet());
+    }
+
+    // Remove duplicates
+    products = new ArrayList<>(new HashSet<>(products));
+
+    // Insertion Sort
+    for (int i = 1; i < products.size(); i++) {
+        String key = products.get(i);
+        int j = i - 1;
+        while (j >= 0 && products.get(j).compareTo(key) > 0) {
+            products.set(j + 1, products.get(j));
+            j--;
+        }
+        products.set(j + 1, key);
+    }
+
+    return products;
 }
 
-
-private int getTotalAddedProducts() {
-    return salesData.values().stream()
-        .flatMap(m -> m.values().stream())
-        .mapToInt(Integer::intValue)
-        .sum();
-}
-public int getTotalSales() {
-    return salesData.values().stream()
-        .flatMap(m -> m.values().stream())
-        .mapToInt(Integer::intValue)
-        .sum();
-}
 
 }
 
