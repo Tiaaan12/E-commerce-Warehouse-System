@@ -82,18 +82,28 @@ public class ProductPanel extends javax.swing.JPanel {
             "100", "Taguig", "Durable 30oz insulated tumbler", 
             new ImageIcon(getClass().getResource("/1012445.png")));
 
-
-    products.add(p4);
+      ProductSearch p6 = new ProductSearch("302346", "Jonathan Thirsty", 
+            "100", "Manila", "Strong ig notes tumbler", 
+            new ImageIcon(getClass().getResource("/302346.png")));
+        ProductSearch p7 = new ProductSearch("204598", "Turquoise-blue", 
+            "100", "Taguig", "Durable 30oz insulated tumbler", 
+            new ImageIcon(getClass().getResource("/204598.png")));
+        
+    products.add(p7);
     products.add(p2);
     products.add(p1);
     products.add(p5);
     products.add(p3);
+    products.add(p4);
+    products.add(p6);
 
     productMap.put(p1.getCode(), p1);
     productMap.put(p2.getCode(), p2);
     productMap.put(p3.getCode(), p3);
     productMap.put(p4.getCode(), p4);
     productMap.put(p5.getCode(), p5);
+    productMap.put(p6.getCode(), p6);
+    productMap.put(p7.getCode(), p7);
 
  
     loadProducts(products);
@@ -156,13 +166,13 @@ public class ProductPanel extends javax.swing.JPanel {
 
     
  private void reloadProductsAlphabetical() {
-    // 1. Get sorted product names from SalesTracker (Insertion Sort result)
+    
     List<String> sortedNames = tracker.getSortedProducts();
 
-    // 2. Map names back to ProductSearch objects
+    
     List<ProductSearch> sortedProducts = new ArrayList<>();
     for (String name : sortedNames) {
-        for (ProductSearch ps : products) { // products = your product list
+        for (ProductSearch ps : products) { 
             if (ps.getName().equals(name)) {
                 sortedProducts.add(ps);
                 break;
@@ -170,7 +180,7 @@ public class ProductPanel extends javax.swing.JPanel {
         }
     }
 
-    // 3. Reload UI
+  
     loadProducts(sortedProducts);
 }
 

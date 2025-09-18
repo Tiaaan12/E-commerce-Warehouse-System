@@ -46,6 +46,8 @@ public class SalesTracker {
         addProduct("Cylinder Collections");
         addProduct("Slate Cup Collection");
         addProduct("Tumbler Collection");
+        addProduct("Jonathan Thirsty");
+        addProduct("Turquoise-blue");
 
         
         recordSale("Manila", "AquaThirst Colorwave", 120);
@@ -69,6 +71,15 @@ public class SalesTracker {
         recordSale("Taguig", "Tumbler Collection", 80);
         recordSale("Pasay", "Tumbler Collection", 95);
         
+        recordSale("Manila", "Jonathan Thirsty", 150);
+        recordSale("Taguig", "Jonathan Thirsty", 80);
+        recordSale("Pasay", "Jonathan Thirsty", 95);
+        
+        recordSale("Manila", "Turquoise-blue", 150);
+        recordSale("Taguig", "Turquoise-blue", 80);
+        recordSale("Pasay", "Turquoise-blue", 95);
+        
+
         
         
     }
