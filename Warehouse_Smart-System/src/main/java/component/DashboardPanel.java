@@ -125,7 +125,10 @@ public class DashboardPanel extends javax.swing.JPanel {
 }
     
     private void updateCounters() {
-   
+       String jSales = String.valueOf(tracker.getTotalCustomers());
+       String jCustomer = String.valueOf(tracker.getTotalCustomers());
+    jTotalCustomers.setText(jCustomer);
+    jTotalSales.setText(jSales);
     jTopLocation.setText(tracker.getHotLocation());
     jTopProduct.setText(tracker.getTopItem());
 }
@@ -149,12 +152,12 @@ public class DashboardPanel extends javax.swing.JPanel {
         jProductCounter = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jPanel10 = new Styledpanel();
-        jSalesCounter = new javax.swing.JLabel();
+        jTotalSales = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jPanel11 = new Styledpanel();
         jLabel17 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        jTotalCustomers = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jPanel7 = new Styledpanel();
         jLabel12 = new javax.swing.JLabel();
@@ -200,7 +203,7 @@ public class DashboardPanel extends javax.swing.JPanel {
         jLabel19.setFont(robotoL);
         jLabel19.setForeground(Color.decode("#42C471"));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("10");
+        jLabel19.setText("3");
         jLabel19.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -243,7 +246,7 @@ public class DashboardPanel extends javax.swing.JPanel {
         jProductCounter.setFont(robotoL);
         jProductCounter.setForeground(Color.decode("#E05454"));
         jProductCounter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jProductCounter.setText("10");
+        jProductCounter.setText("100000");
         jProductCounter.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jPanel9.add(jProductCounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 80, 180, -1));
 
@@ -256,12 +259,12 @@ public class DashboardPanel extends javax.swing.JPanel {
         jPanel10.setPreferredSize(new java.awt.Dimension(177, 175));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jSalesCounter.setFont(robotoL);
-        jSalesCounter.setForeground(Color.decode("#F9B829"));
-        jSalesCounter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jSalesCounter.setText("10");
-        jSalesCounter.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel10.add(jSalesCounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 170, -1));
+        jTotalSales.setFont(robotoL);
+        jTotalSales.setForeground(Color.decode("#F9B829"));
+        jTotalSales.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTotalSales.setText("0");
+        jTotalSales.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jPanel10.add(jTotalSales, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 170, -1));
 
         jLabel13.setFont(roboto);
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -285,12 +288,12 @@ public class DashboardPanel extends javax.swing.JPanel {
         jLabel17.setText("Total Customers");
         jPanel11.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 170, -1));
 
-        jLabel16.setFont(robotoL);
-        jLabel16.setForeground(Color.decode("#5E42FE"));
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("10");
-        jLabel16.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel11.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 80, 170, -1));
+        jTotalCustomers.setFont(robotoL);
+        jTotalCustomers.setForeground(Color.decode("#5E42FE"));
+        jTotalCustomers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTotalCustomers.setText("0");
+        jTotalCustomers.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jPanel11.add(jTotalCustomers, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 80, 170, -1));
 
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Customer.png"))); // NOI18N
@@ -507,7 +510,6 @@ public class DashboardPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -532,8 +534,9 @@ public class DashboardPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel jProductCounter;
-    private javax.swing.JLabel jSalesCounter;
     private javax.swing.JLabel jTopLocation;
     private javax.swing.JLabel jTopProduct;
+    private javax.swing.JLabel jTotalCustomers;
+    private javax.swing.JLabel jTotalSales;
     // End of variables declaration//GEN-END:variables
 }

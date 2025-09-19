@@ -23,7 +23,8 @@ public class SalesTracker {
      private PriorityQueue<Map.Entry<String, Integer>> productHeap;
      private Map<String, Integer> locationTotals;
      private PriorityQueue<Map.Entry<String, Integer>> locationHeap;
-     
+     private int totalSales = 0;
+     private int totalCustomers = 0;
     
     private int INITIAL_STOCK = 1015;
 
@@ -120,8 +121,19 @@ public class SalesTracker {
     locationTotals.put(location, locationTotals.getOrDefault(location, 0) + qty);
     locationHeap.clear();
     locationHeap.addAll(locationTotals.entrySet());
+    
+    totalSales += qty;
+    totalCustomers++;
 }
 
+ public int getTotalSales() {
+    return totalSales; 
+ }
+ 
+ public int getTotalCustomers() {
+     return totalCustomers;
+ }
+ 
  
       
 
