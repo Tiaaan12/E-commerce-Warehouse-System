@@ -89,13 +89,23 @@ public class ProductPanel extends javax.swing.JPanel {
             "100", "Taguig", "Durable 30oz insulated tumbler", 
             new ImageIcon(getClass().getResource("/204598.png")));
         
+        ProductSearch p8 = new ProductSearch("102345", "Mint Chip 16oz", 
+            "100", "Pasay", "Durable summer mint tumbler", 
+            new ImageIcon(getClass().getResource("/102345.png")));
+        ProductSearch p9 = new ProductSearch("193506", "Wild Mushroom", 
+            "100", "Taguig", "Wild mushroom durable tumbler", 
+            new ImageIcon(getClass().getResource("/193506.png")));
+        
+        
     products.add(p7);
-    products.add(p2);
-    products.add(p1);
+    products.add(p4);
+    products.add(p9);
     products.add(p5);
     products.add(p3);
-    products.add(p4);
+    products.add(p2);
     products.add(p6);
+    products.add(p8);
+    products.add(p1);
 
     productMap.put(p1.getCode(), p1);
     productMap.put(p2.getCode(), p2);
@@ -104,6 +114,8 @@ public class ProductPanel extends javax.swing.JPanel {
     productMap.put(p5.getCode(), p5);
     productMap.put(p6.getCode(), p6);
     productMap.put(p7.getCode(), p7);
+    productMap.put(p8.getCode(), p8);
+    productMap.put(p9.getCode(), p9);
 
  
     loadProducts(products);

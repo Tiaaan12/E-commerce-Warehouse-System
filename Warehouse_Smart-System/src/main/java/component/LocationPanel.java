@@ -9,9 +9,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Frame;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import util.FontLoader;
 
@@ -30,14 +33,38 @@ public class LocationPanel extends javax.swing.JPanel {
     
     public void showManila() {
     JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), true);
-    dialog.setSize(900, 600);
+    dialog.setSize(700, 470);
     dialog.setLayout(new BorderLayout(10,10));
     dialog.setLocationRelativeTo(this);
     dialog.setBackground(Color.decode("#212121"));
     
- JLabel imgLabel = new JLabel();
- imgLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/manilaWS (1).png"))); 
-     dialog.add(imgLabel);
+    JPanel panel = new JPanel();
+    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+    JLabel label = new JLabel("MANILA");
+    Font inter = FontLoader.loadFont("resources/fonts/Inter_28pt-ExtraBold.ttf", 25f);
+    label.setFont(inter);
+    label.setHorizontalAlignment(SwingConstants.CENTER);
+   
+    JLabel imgLabel = new JLabel();
+    imgLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/manilaWS (1).png")));     
+    panel.add(label);
+    panel.add(imgLabel);
+    
+    JPanel details = new JPanel();
+    details.setLayout(new BoxLayout(details, BoxLayout.Y_AXIS));
+    
+    JLabel labelRank = new JLabel("Rank: 3");
+    JLabel labelStatus = new JLabel("Status: Hot(Store products)");
+    
+    details.add(labelRank);
+    details.add(labelStatus);
+    
+    
+    details.setVisible(true);
+    panel.setVisible(true);
+ 
+     dialog.add(panel);
+     dialog.add(details, BorderLayout.EAST);
      dialog.setVisible(true);
      
      

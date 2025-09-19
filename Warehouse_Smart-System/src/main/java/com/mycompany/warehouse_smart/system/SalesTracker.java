@@ -47,37 +47,47 @@ public class SalesTracker {
         addProduct("Slate Cup Collection");
         addProduct("Tumbler Collection");
         addProduct("Jonathan Thirsty");
-        addProduct("Turquoise-blue");
+        addProduct("Turquoise Blue");
+        addProduct("Mint Chip 16oz");
+        addProduct("Wild Mushroom");
 
         
-        recordSale("Manila", "AquaThirst Colorwave", 120);
+        recordSale("Manila", "AquaThirst Colorwave", 100);
         recordSale("Taguig", "AquaThirst Colorwave", 100);
-        recordSale("Pasay", "AquaThirst Colorwave", 140);
+        recordSale("Pasay", "AquaThirst Colorwave", 100);
 
-        recordSale("Manila", "AquaThirst Dream", 90);
-        recordSale("Taguig", "AquaThirst Dream", 110);
-        recordSale("Pasay", "AquaThirst Dream", 130);
+        recordSale("Manila", "AquaThirst Dream", 100);
+        recordSale("Taguig", "AquaThirst Dream", 100);
+        recordSale("Pasay", "AquaThirst Dream", 100);
 
-        recordSale("Manila", "Cylinder Collections", 150);
-        recordSale("Taguig", "Cylinder Collections", 80);
-        recordSale("Pasay", "Cylinder Collections", 95);
+        recordSale("Manila", "Cylinder Collections", 100);
+        recordSale("Taguig", "Cylinder Collections", 100);
+        recordSale("Pasay", "Cylinder Collections", 100);
         
         
-        recordSale("Manila", "Slate Cup Collection", 150);
-        recordSale("Taguig", "Slate Cup Collection", 80);
-        recordSale("Pasay", "Slate Cup Collection", 95);
+        recordSale("Manila", "Slate Cup Collection", 100);
+        recordSale("Taguig", "Slate Cup Collection", 100);
+        recordSale("Pasay", "Slate Cup Collection", 100);
         
-        recordSale("Manila", "Tumbler Collection", 150);
-        recordSale("Taguig", "Tumbler Collection", 80);
-        recordSale("Pasay", "Tumbler Collection", 95);
+        recordSale("Manila", "Tumbler Collection", 100);
+        recordSale("Taguig", "Tumbler Collection", 100);
+        recordSale("Pasay", "Tumbler Collection", 100);
         
-        recordSale("Manila", "Jonathan Thirsty", 150);
-        recordSale("Taguig", "Jonathan Thirsty", 80);
-        recordSale("Pasay", "Jonathan Thirsty", 95);
+        recordSale("Manila", "Jonathan Thirsty", 100);
+        recordSale("Taguig", "Jonathan Thirsty", 100);
+        recordSale("Pasay", "Jonathan Thirsty", 100);
         
-        recordSale("Manila", "Turquoise-blue", 150);
-        recordSale("Taguig", "Turquoise-blue", 80);
-        recordSale("Pasay", "Turquoise-blue", 95);
+        recordSale("Manila", "Turquoise Blue", 100);
+        recordSale("Taguig", "Turquoise Blue", 100);
+        recordSale("Pasay", "Turquoise Blue", 100);
+        
+        recordSale("Manila", "Mint Chip 16oz", 100);
+        recordSale("Taguig", "Mint Chip 16oz", 100);
+        recordSale("Pasay", "Mint Chip 16oz", 100);
+        
+        recordSale("Manila", "Wild Mushroom", 100);
+        recordSale("Taguig", "Wild Mushroom", 100);
+        recordSale("Pasay", "Wild Mushroom", 100);
         
 
         
@@ -112,6 +122,8 @@ public class SalesTracker {
     locationHeap.addAll(locationTotals.entrySet());
 }
 
+ 
+      
 
     public Map<String, Map<String, Integer>> getSalesData() {
         return salesData;
@@ -127,7 +139,7 @@ public String getHotLocation() {
 public List<String> getSortedProducts() {
     List<String> products = new ArrayList<>();
     for (Map<String, Integer> map : salesData.values()) {
-        products.addAll(map.keySet());
+         products.addAll(map.keySet());
     }
 
 
