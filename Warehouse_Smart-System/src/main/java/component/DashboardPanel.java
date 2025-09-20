@@ -125,7 +125,7 @@ public class DashboardPanel extends javax.swing.JPanel {
 }
     
     private void updateCounters() {
-       String jSales = String.valueOf(tracker.getTotalCustomers());
+       String jSales = String.valueOf(tracker.getTotalSales());
        String jCustomer = String.valueOf(tracker.getTotalCustomers());
     jTotalCustomers.setText(jCustomer);
     jTotalSales.setText(jSales);
@@ -262,7 +262,7 @@ public class DashboardPanel extends javax.swing.JPanel {
         jTotalSales.setFont(robotoL);
         jTotalSales.setForeground(Color.decode("#F9B829"));
         jTotalSales.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jTotalSales.setText("0");
+        jTotalSales.setText("2700");
         jTotalSales.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jPanel10.add(jTotalSales, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 170, -1));
 
@@ -291,7 +291,7 @@ public class DashboardPanel extends javax.swing.JPanel {
         jTotalCustomers.setFont(robotoL);
         jTotalCustomers.setForeground(Color.decode("#5E42FE"));
         jTotalCustomers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jTotalCustomers.setText("0");
+        jTotalCustomers.setText("27");
         jTotalCustomers.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jPanel11.add(jTotalCustomers, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 80, 170, -1));
 

@@ -302,7 +302,7 @@
               <Connection code="Color.decode(&quot;#F9B829&quot;)" type="code"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="0"/>
+            <Property name="text" type="java.lang.String" value="2700"/>
             <Property name="verticalAlignment" type="int" value="1"/>
           </Properties>
           <AuxValues>
@@ -392,7 +392,7 @@
               <Connection code="Color.decode(&quot;#5E42FE&quot;)" type="code"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="0"/>
+            <Property name="text" type="java.lang.String" value="27"/>
             <Property name="verticalAlignment" type="int" value="1"/>
           </Properties>
           <AuxValues>
