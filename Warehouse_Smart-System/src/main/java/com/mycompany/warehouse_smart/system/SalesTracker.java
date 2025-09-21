@@ -27,8 +27,9 @@ public class SalesTracker {
      private int totalCustomers = 0;
     
     private int INITIAL_STOCK = 1015;
-
+    
     public SalesTracker() {
+        
         salesData = new HashMap<>();
         productMap = new HashMap<>();
         productTotals = new HashMap<>();

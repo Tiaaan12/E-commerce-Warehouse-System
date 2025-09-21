@@ -59,7 +59,8 @@ private DefaultTableModel tableModel;
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
     centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 
-for (int i = 0; i < jTable1.getColumnCount(); i++) {
+
+    for (int i = 0; i < jTable1.getColumnCount(); i++) {
     jTable1.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
 }
 

@@ -85,7 +85,7 @@ public class ProductPanel extends javax.swing.JPanel {
       ProductSearch p6 = new ProductSearch("302346", "Jonathan Thirsty", 
             "100", "Manila", "Strong ig notes tumbler", 
             new ImageIcon(getClass().getResource("/302346.png")));
-        ProductSearch p7 = new ProductSearch("204598", "Turquoise-blue", 
+        ProductSearch p7 = new ProductSearch("204598", "Turquoise Blue", 
             "100", "Taguig", "Durable 30oz insulated tumbler", 
             new ImageIcon(getClass().getResource("/204598.png")));
         

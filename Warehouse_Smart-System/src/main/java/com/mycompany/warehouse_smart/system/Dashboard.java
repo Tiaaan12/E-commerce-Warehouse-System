@@ -57,7 +57,9 @@ public class Dashboard extends javax.swing.JFrame {
      */
     public Dashboard() {
         initComponents();
+       
           tracker = new SalesTracker();
+         
         dashboardPanel1.updateChart();
         historyPanel = new HistoryPanel();
         jPanel17.add(historyPanel, "History");
@@ -71,9 +73,11 @@ public class Dashboard extends javax.swing.JFrame {
          
          reportsPanel = new ReportsPanel();
          jPanel17.add(reportsPanel, "Reports");
+         
    CardLayout cl = (CardLayout) jPanel17.getLayout();
     cl.show(jPanel17, "Dashboard");
     
+
     setTime();
     
     }

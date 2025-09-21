@@ -48,9 +48,12 @@ public class DashboardPanel extends javax.swing.JPanel {
     public DashboardPanel() {
         initComponents();
         tracker = new SalesTracker();
-        updateChart();
+    updateChart();
+        
+       
     }
     
+   
     public void updateChart() {
     DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
