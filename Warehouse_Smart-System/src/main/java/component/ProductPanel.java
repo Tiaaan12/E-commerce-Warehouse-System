@@ -51,16 +51,20 @@ public class ProductPanel extends javax.swing.JPanel {
     private HistoryPanel historyPanel;
     private SalesTracker tracker;
     private List<ProductSearch> products;
+    private ReportsPanel reportsPanel;
     /**
      * Creates new form ProductPanel
      */
-    public ProductPanel(DashboardPanel dashboardPanel, HistoryPanel historyPanel) {
+    public ProductPanel(DashboardPanel dashboardPanel, HistoryPanel historyPanel, SalesTracker tracker, ReportsPanel reportsPanel) {
         this.dashboardPanel = dashboardPanel;
         this.historyPanel = historyPanel;
+        this.tracker = tracker;
+        this.reportsPanel = reportsPanel;
         initComponents();
-        tracker = new SalesTracker();
+      
          productMap = new HashMap<>();
           products = new ArrayList<>();
+          reportsPanel = new ReportsPanel(tracker);
  
     ProductSearch p1 = new ProductSearch("1012243", "AquaThirst Colorwave", 
             "100", "Manila", "Stylish flip-top bottle", 
@@ -122,9 +126,15 @@ public class ProductPanel extends javax.swing.JPanel {
 
       
     }
+     public void setTracker(SalesTracker tracker) {
+    this.tracker = tracker;
+}
  private void sellProduct(String location, String product, int qty) {
         dashboardPanel.recordSale(location, product, qty);
     }
+ private void loadProductSales(List<ProductSearch> productList) {
+     
+ }
  private void loadProducts(List<ProductSearch> list) {
     jPanel1.removeAll(); 
 
@@ -259,7 +269,11 @@ detailsPanel.add(locationPanel);
         if (dashboardPanel != null) {
             historyPanel.addSaleRecord(p.getName(), selectedLocation, qty);
             dashboardPanel.recordSale(selectedLocation, p.getName(), qty);
+            reportsPanel.refreshDemand();
         }
+        
+          
+
 
         JOptionPane.showMessageDialog(dialog, "Sale recorded successfully!");
         dialog.dispose();
@@ -274,6 +288,8 @@ detailsPanel.add(locationPanel);
 
     dialog.setVisible(true);
 }
+
+ 
 
 
 

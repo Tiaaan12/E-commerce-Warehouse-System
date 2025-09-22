@@ -29,6 +29,7 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.data.category.DefaultCategoryDataset;
 import com.formdev.flatlaf.FlatDarculaLaf;
+import component.DashboardPanel;
 import component.LocationPanel;
 import component.ProductPanel;
 import component.HistoryPanel;
@@ -52,31 +53,40 @@ public class Dashboard extends javax.swing.JFrame {
    private LocationPanel locationPanel;
    private HistoryPanel historyPanel;
    private ReportsPanel reportsPanel;
+   private DashboardPanel dashboardPanel;
     /**
      * Creates new form Dashboard
      */
     public Dashboard() {
         initComponents();
        
-          tracker = new SalesTracker();
-         
+           tracker = new SalesTracker();
+         dashboardPanel1 = new DashboardPanel(tracker);
         dashboardPanel1.updateChart();
-        historyPanel = new HistoryPanel();
+        
+        historyPanel = new HistoryPanel(tracker);
         jPanel17.add(historyPanel, "History");
+         
+         reportsPanel = new ReportsPanel(tracker);
+         jPanel17.add(reportsPanel, "Reports");
+        
          jPanel17.add(dashboardPanel1, "Dashboard");
-         productPanel = new ProductPanel(dashboardPanel1, historyPanel);
+         
+         productPanel = new ProductPanel(dashboardPanel1, historyPanel,tracker, reportsPanel);
          productPanel.setOpaque(false);
          jPanel17.add(productPanel, "Product");
+         
          locationPanel = new LocationPanel();
          locationPanel.setOpaque(false);
          jPanel17.add(locationPanel, "Location");
-         
-         reportsPanel = new ReportsPanel();
-         jPanel17.add(reportsPanel, "Reports");
+        
          
    CardLayout cl = (CardLayout) jPanel17.getLayout();
     cl.show(jPanel17, "Dashboard");
     
+    dashboardPanel1.setTracker(tracker);
+    productPanel.setTracker(tracker);
+    reportsPanel.setTracker(tracker);
 
     setTime();
     
@@ -98,7 +108,6 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        simulateBtn = new javax.swing.JButton();
         jPanel12 = new RoundPanel(20);
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -117,7 +126,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
-        dashboardPanel1 = new component.DashboardPanel();
+        dashboardPanel1 = new component.DashboardPanel(tracker);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(Color.decode("#1A1A1A"));
@@ -162,14 +171,6 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(51, 51, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo resize.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
-
-        simulateBtn.setText("Simulate");
-        simulateBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                simulateBtnActionPerformed(evt);
-            }
-        });
-        jPanel2.add(simulateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, -1, -1));
 
         jPanel12.setBackground(Color.decode("#5541CB"));
         jPanel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -416,15 +417,6 @@ public class Dashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void simulateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulateBtnActionPerformed
-        dashboardPanel1.recordSale("Manila", "AquaThirst Colorwave", 30); 
-        dashboardPanel1.recordSale("Manila", "AquaThirst Dream", 50); 
-        dashboardPanel1.recordSale("Pasay", "Cylinder Collections", 50);
-     dashboardPanel1.updateChart();
-        
-    
-    }//GEN-LAST:event_simulateBtnActionPerformed
-
     private void jLabelProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelProductMouseClicked
         
     }//GEN-LAST:event_jLabelProductMouseClicked
@@ -590,7 +582,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel jTxtDate;
     private javax.swing.JLabel jTxtTime;
-    private javax.swing.JButton simulateBtn;
     // End of variables declaration//GEN-END:variables
 
    

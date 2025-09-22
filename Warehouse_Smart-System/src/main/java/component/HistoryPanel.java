@@ -4,6 +4,7 @@
  */
 package component;
 
+import com.mycompany.warehouse_smart.system.SalesTracker;
 import com.mycompany.warehouse_smart.system.Styledpanel;
 import java.awt.Color;
 import java.awt.Font;
@@ -12,17 +13,20 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import util.FontLoader;
 
+
 /**
  *
  * @author cvdev
  */
 public class HistoryPanel extends javax.swing.JPanel {
 private DefaultTableModel tableModel;
+private SalesTracker tracker;
     /**
      * Creates new form HistoryPanel
      */
-    public HistoryPanel() {
+    public HistoryPanel(SalesTracker tracker) {
         initComponents();
+        this.tracker = tracker;
          jTable1.setDefaultEditor(Object.class, null);
 
     jTable1.setDefaultRenderer(Object.class, new javax.swing.table.DefaultTableCellRenderer() {

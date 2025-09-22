@@ -45,16 +45,21 @@ public class DashboardPanel extends javax.swing.JPanel {
      * Creates new form DashboardPanel
      */
      private SalesTracker tracker;  
-    public DashboardPanel() {
+     
+    public DashboardPanel(SalesTracker tracker) {
+         this.tracker = tracker;
         initComponents();
-        tracker = new SalesTracker();
-    updateChart();
+         updateChart();
+       
+        
+   
         
        
     }
     
    
     public void updateChart() {
+        if (tracker == null) return; 
     DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
  
@@ -136,6 +141,9 @@ public class DashboardPanel extends javax.swing.JPanel {
     jTopProduct.setText(tracker.getTopItem());
 }
 
+    public void setTracker(SalesTracker tracker) {
+    this.tracker = tracker;
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

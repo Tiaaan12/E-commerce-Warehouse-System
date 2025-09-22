@@ -25,6 +25,8 @@ public class SalesTracker {
      private PriorityQueue<Map.Entry<String, Integer>> locationHeap;
      private int totalSales = 0;
      private int totalCustomers = 0;
+   
+
     
     private int INITIAL_STOCK = 1015;
     
@@ -105,6 +107,7 @@ public class SalesTracker {
             salesData.get(location).putIfAbsent(product, 0);
         }
     }
+        
     
 
   public void recordSale(String location, String product, int qty) {
@@ -134,6 +137,9 @@ public class SalesTracker {
  public int getTotalCustomers() {
      return totalCustomers;
  }
+ public Map<String, Integer> getProductSales() {
+    return productTotals;
+}
  
  
       
