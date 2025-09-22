@@ -185,6 +185,7 @@ public class DashboardPanel extends javax.swing.JPanel {
         jPanel13 = new Styledpanel();
         jLabel4 = new javax.swing.JLabel();
 
+        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(815, 567));
 
         jPanel6.setBackground(Color.decode("#212121"));

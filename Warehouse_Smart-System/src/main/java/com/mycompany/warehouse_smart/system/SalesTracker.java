@@ -141,6 +141,10 @@ public class SalesTracker {
     return productTotals;
 }
  
+ public Map<String, Integer> getLocationSales(){
+     return locationTotals;
+ }
+ 
  
       
 
