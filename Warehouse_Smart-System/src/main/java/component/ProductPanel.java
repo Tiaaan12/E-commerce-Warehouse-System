@@ -549,9 +549,7 @@ private ImageIcon loadImage(String path, int w, int h) {
         if ("Alphabetical".equals(selected)) {
             reloadProductsAlphabetical();
         } 
-        else if("By Sales".equals(selected)) {
-            
-        }
+        
          else {
             loadProducts(products); 
         }

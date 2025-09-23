@@ -42,6 +42,7 @@ import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
+import javax.swing.border.EmptyBorder;
 
 public class ReportsPanel extends javax.swing.JPanel {
 
@@ -140,6 +141,31 @@ public class ReportsPanel extends javax.swing.JPanel {
    public void locationAnalysis(SalesTracker tracker) {
     jPanel14.removeAll();
     jPanel14.setLayout(new BoxLayout(jPanel14, BoxLayout.Y_AXIS));
+    
+    JLabel titleLabel = new JLabel("Location Analysis", SwingConstants.CENTER);
+    titleLabel.setFont(new Font("Sanserif", Font.BOLD, 18));
+    titleLabel.setForeground(Color.decode("#D6D6D6"));
+    titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 5));
+    jPanel14.add(titleLabel);
+    
+    JPanel header = new JPanel();
+    header.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+    header.setOpaque(false);
+    
+    JLabel locationLabel = new JLabel("Location", SwingConstants.CENTER);
+    locationLabel.setForeground(Color.WHITE);
+    
+    JLabel locationSalesLabel = new JLabel("Sales", SwingConstants.CENTER);
+    locationSalesLabel.setForeground(Color.CYAN);
+    
+    JLabel locationRankLabel = new JLabel("Rank", SwingConstants.CENTER);
+    locationRankLabel.setForeground(Color.GREEN);
+    
+    header.add(locationLabel);
+    header.add(locationSalesLabel);
+    header.add(locationRankLabel);
+    
+    jPanel14.add(header);
 
     Map<String, Integer> locationSales = tracker.getLocationSales();
     List<Map.Entry<String, Integer>> locationSalesList = new ArrayList<>(locationSales.entrySet());
@@ -152,6 +178,7 @@ public class ReportsPanel extends javax.swing.JPanel {
         JPanel row = new JPanel(new GridLayout(1, 3));
         row.setBackground(new Color(40, 40, 40));
         row.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        row.setOpaque(false);
 
         JLabel nameLabel = new JLabel(entry.getKey());
         nameLabel.setForeground(Color.WHITE);
@@ -172,7 +199,7 @@ public class ReportsPanel extends javax.swing.JPanel {
         rank++;
     }
 
-    // set preferred size once
+  
     jPanel14.setPreferredSize(new Dimension(
         jPanel14.getWidth(),
         locationSalesList.size() * rowHeight
@@ -195,7 +222,8 @@ int rank = 1;
 for (Map.Entry<String, Integer> entry : salesList) {
     JPanel row = new JPanel(new GridLayout(1, 3));
     row.setBackground(new Color(40, 40, 40));
-    row.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+   row.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+    row.setOpaque(false);
 
     JLabel nameLabel = new JLabel(entry.getKey());
     nameLabel.setForeground(Color.WHITE);
@@ -319,7 +347,7 @@ public void refreshDemand() {
         );
         productDemandPanelLayout.setVerticalGroup(
             productDemandPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 178, Short.MAX_VALUE)
+            .addGap(0, 193, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(productDemandPanel);
@@ -360,9 +388,7 @@ public void refreshDemand() {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
