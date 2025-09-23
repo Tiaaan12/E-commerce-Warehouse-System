@@ -60,14 +60,12 @@ private SalesTracker tracker;
         
         tableModel.setColumnIdentifiers(new Object[]{"Product Name", "Location", "Time", "Quantity"});
         
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
     centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-
 
     for (int i = 0; i < jTable1.getColumnCount(); i++) {
     jTable1.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
 }
-
         
     }
     public void addSaleRecord(String product, String location, int quantity) {
@@ -156,7 +154,7 @@ private SalesTracker tracker;
     jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
     jTable1.setGridColor(new java.awt.Color(255, 255, 255));
     jTable1.setRowHeight(30);
-    jTable1.setSelectionBackground(Color.decode("#212121"));
+    jTable1.setSelectionBackground(Color.decode("#5541CB"));
     jTable1.setShowHorizontalLines(true);
     jTable1.setShowVerticalLines(true);
     jScrollPane2.setViewportView(jTable1);

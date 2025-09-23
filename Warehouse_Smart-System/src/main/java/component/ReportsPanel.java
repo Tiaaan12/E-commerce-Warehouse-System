@@ -140,17 +140,22 @@ public class ReportsPanel extends javax.swing.JPanel {
     
    public void locationAnalysis(SalesTracker tracker) {
     jPanel14.removeAll();
-    jPanel14.setLayout(new BoxLayout(jPanel14, BoxLayout.Y_AXIS));
+    jPanel14.setLayout(new FlowLayout(1));
     
-    JLabel titleLabel = new JLabel("Location Analysis", SwingConstants.CENTER);
+    JLabel titleLabel = new JLabel("Location Analysis");
+    titleLabel.setHorizontalAlignment(SwingConstants.LEADING);
     titleLabel.setFont(new Font("Sanserif", Font.BOLD, 18));
     titleLabel.setForeground(Color.decode("#D6D6D6"));
-    titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 5));
+   
     jPanel14.add(titleLabel);
     
-    JPanel header = new JPanel();
-    header.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-    header.setOpaque(false);
+  
+    
+    JPanel tablePanel = new JPanel();
+    tablePanel.setLayout(new GridLayout(0, 3, 40, 15));
+    tablePanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0 ));
+    tablePanel.setOpaque(false);
+    
     
     JLabel locationLabel = new JLabel("Location", SwingConstants.CENTER);
     locationLabel.setForeground(Color.WHITE);
@@ -161,11 +166,14 @@ public class ReportsPanel extends javax.swing.JPanel {
     JLabel locationRankLabel = new JLabel("Rank", SwingConstants.CENTER);
     locationRankLabel.setForeground(Color.GREEN);
     
-    header.add(locationLabel);
-    header.add(locationSalesLabel);
-    header.add(locationRankLabel);
+    tablePanel.add(locationLabel);
+    tablePanel.add(locationSalesLabel);
+    tablePanel.add(locationRankLabel);
+    tablePanel.setVisible(true);
     
-    jPanel14.add(header);
+    jPanel14.add(tablePanel);
+    
+    
 
     Map<String, Integer> locationSales = tracker.getLocationSales();
     List<Map.Entry<String, Integer>> locationSalesList = new ArrayList<>(locationSales.entrySet());
@@ -173,32 +181,37 @@ public class ReportsPanel extends javax.swing.JPanel {
 
     int rowHeight = 40;
     int rank = 1;
-
+     JPanel row = new JPanel();
+     //row.setLayout(new GridLayout(0, 3, 0, 0));
     for (Map.Entry<String, Integer> entry : locationSalesList) {
-        JPanel row = new JPanel(new GridLayout(1, 3));
+       
         row.setBackground(new Color(40, 40, 40));
         row.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
         row.setOpaque(false);
 
         JLabel nameLabel = new JLabel(entry.getKey());
         nameLabel.setForeground(Color.WHITE);
+        nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel salesLabel = new JLabel(String.valueOf(entry.getValue()), SwingConstants.CENTER);
         salesLabel.setForeground(Color.CYAN);
+       
 
         JLabel rankLabel = new JLabel(String.valueOf(rank), SwingConstants.CENTER);
         rankLabel.setForeground(Color.GREEN);
 
-        row.add(nameLabel);
-        row.add(salesLabel);
-        row.add(rankLabel);
+        tablePanel.add(nameLabel);
+        tablePanel.add(salesLabel);
+        tablePanel.add(rankLabel);
+        
+        
 
         row.setMaximumSize(new Dimension(Integer.MAX_VALUE, rowHeight));
-        jPanel14.add(row);
+        
 
         rank++;
     }
-
+    tablePanel.add(row);
   
     jPanel14.setPreferredSize(new Dimension(
         jPanel14.getWidth(),
@@ -211,22 +224,53 @@ public class ReportsPanel extends javax.swing.JPanel {
 
     public void loadProductDemand(SalesTracker tracker) {
     productDemandPanel.removeAll();
-productDemandPanel.setLayout(new BoxLayout(productDemandPanel, BoxLayout.Y_AXIS));
+productDemandPanel.setLayout(new FlowLayout(1));
 
+JLabel titleLabel = new JLabel("Product Demand Analysis", SwingConstants.CENTER);
+titleLabel.setForeground(Color.decode("#D6D6D6"));
+titleLabel.setFont(new Font("Sanserif", Font.BOLD, 18));
+titleLabel.setForeground(Color.decode("#D6D6D6"));
+productDemandPanel.add(titleLabel);
+
+  JPanel tablePanel = new JPanel();
+    tablePanel.setLayout(new GridLayout(0, 3, 40, 15));
+    tablePanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0 ));
+    tablePanel.setOpaque(false);
+    
+    
+    JLabel locationLabel = new JLabel("Product Name", SwingConstants.CENTER);
+    locationLabel.setForeground(Color.WHITE);
+    
+    JLabel locationSalesLabel = new JLabel("Sales", SwingConstants.CENTER);
+    locationSalesLabel.setForeground(Color.CYAN);
+    
+    JLabel locationRankLabel = new JLabel("Rank", SwingConstants.CENTER);
+    locationRankLabel.setForeground(Color.GREEN);
+    
+    tablePanel.add(locationLabel);
+    tablePanel.add(locationSalesLabel);
+    tablePanel.add(locationRankLabel);
+    tablePanel.setVisible(true);
+    
+    productDemandPanel.add(tablePanel);
+    
 Map<String, Integer> productSales = tracker.getProductSales();
 List<Map.Entry<String, Integer>> salesList = new ArrayList<>(productSales.entrySet());
 salesList.sort((a, b) -> b.getValue().compareTo(a.getValue()));
 
-int rowHeight = 40;
+int rowHeight = 45;
 int rank = 1;
+JPanel row = new JPanel();
 for (Map.Entry<String, Integer> entry : salesList) {
-    JPanel row = new JPanel(new GridLayout(1, 3));
     row.setBackground(new Color(40, 40, 40));
    row.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
     row.setOpaque(false);
+    
+    
 
-    JLabel nameLabel = new JLabel(entry.getKey());
+    JLabel nameLabel = new JLabel(entry.getKey(), SwingConstants.CENTER);
     nameLabel.setForeground(Color.WHITE);
+    
 
     JLabel salesLabel = new JLabel(String.valueOf(entry.getValue()), SwingConstants.CENTER);
     salesLabel.setForeground(Color.CYAN);
@@ -234,16 +278,16 @@ for (Map.Entry<String, Integer> entry : salesList) {
     JLabel rankLabel = new JLabel(String.valueOf(rank), SwingConstants.CENTER);
     rankLabel.setForeground(Color.GREEN);
 
-    row.add(nameLabel);
-    row.add(salesLabel);
-    row.add(rankLabel);
+    tablePanel.add(nameLabel);
+    tablePanel.add(salesLabel);
+    tablePanel.add(rankLabel);
 
     row.setMaximumSize(new Dimension(Integer.MAX_VALUE, rowHeight));
     productDemandPanel.add(row);
 
     rank++;
 }
-
+    tablePanel.add(row);
 
 productDemandPanel.setPreferredSize(new Dimension(
         productDemandPanel.getWidth(),

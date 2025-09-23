@@ -368,6 +368,7 @@ private ImageIcon loadImage(String path, int w, int h) {
 
         jScrollPane1.setViewportView(jPanel1);
         jScrollPane1.setBackground(Color.decode("#1A1A1A"));
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
         jScrollPane1.setForeground(Color.decode("#1A1A1A"));
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setOpaque(false);
