@@ -25,10 +25,17 @@ public class SalesTracker {
      private PriorityQueue<Map.Entry<String, Integer>> locationHeap;
      private int totalSales = 0;
      private int totalCustomers = 0;
+     
+
+private Map<String, Map<String, Integer>> stockData;
+
+
+private static final int INITIAL_STOCK = 10000;
+
+private final String[] LOCATIONS = {"Manila", "Taguig", "Pasay"};
    
 
-    
-    private int INITIAL_STOCK = 1015;
+   
     
     public SalesTracker() {
         
@@ -103,31 +110,69 @@ public class SalesTracker {
     }
 
     private void addProduct(String product) {
-        for (String location : salesData.keySet()) {
-            salesData.get(location).putIfAbsent(product, 0);
-        }
+    // Ensure sales data structure
+    for (String location : salesData.keySet()) {
+        salesData.get(location).putIfAbsent(product, 0);
     }
+
+    // Initialize stock if not already done
+    if (stockData == null) {
+        stockData = new HashMap<>();
+    }
+
+    Map<String, Integer> locationStock = new HashMap<>();
+    for (String loc : LOCATIONS) {
+        locationStock.put(loc, INITIAL_STOCK);
+    }
+
+    stockData.put(product, locationStock);
+}
+
         
     
+public void recordSale(String location, String product, int qty) {
+    // --- STOCK CHECK ---
+    if (stockData != null && stockData.containsKey(product)) {
+        Map<String, Integer> locStock = stockData.get(product);
+        int current = locStock.getOrDefault(location, 0);
+        if (current < qty) {
+            System.out.println("Not enough stock for " + product + " in " + location);
+            return; // stop sale if not enough
+        }
+        locStock.put(location, current - qty);
+    }
 
-  public void recordSale(String location, String product, int qty) {
-   
+    // --- SALES LOGIC ---
     salesData.putIfAbsent(location, new HashMap<>());
     Map<String, Integer> productMap = salesData.get(location);
     productMap.put(product, productMap.getOrDefault(product, 0) + qty);
 
-   
     productTotals.put(product, productTotals.getOrDefault(product, 0) + qty);
     productHeap.clear();
     productHeap.addAll(productTotals.entrySet());
 
- 
     locationTotals.put(location, locationTotals.getOrDefault(location, 0) + qty);
     locationHeap.clear();
     locationHeap.addAll(locationTotals.entrySet());
-    
+
     totalSales += qty;
     totalCustomers++;
+}
+
+// Get stock for specific product and location
+public int getStock(String product, String location) {
+    if (stockData == null || !stockData.containsKey(product)) return 0;
+    return stockData.get(product).getOrDefault(location, 0);
+}
+
+// Get total stock across all locations
+public int getTotalStock(String product) {
+    if (stockData == null || !stockData.containsKey(product)) return 0;
+    int total = 0;
+    for (String loc : LOCATIONS) {
+        total += stockData.get(product).get(loc);
+    }
+    return total;
 }
 
  public int getTotalSales() {

@@ -164,9 +164,12 @@ public class ProductPanel extends javax.swing.JPanel {
                 getClass().getResource("/barcodes/" + p.getCode() + ".png")));
         codeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel statusLabel = new JLabel(p.getStatus()); 
+       int totalStock = tracker.getTotalStock(p.getName());
+        String stockText = (totalStock > 0) ? "Stock: " + totalStock : "Out of Stock";
+
+        JLabel statusLabel = new JLabel(stockText);
         statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        statusLabel.setForeground(Color.GREEN);
+        statusLabel.setForeground(totalStock > 0 ? Color.GREEN : Color.RED);
 
         JLabel locLabel = new JLabel(p.getLocation());
         locLabel.setForeground(Color.CYAN);
