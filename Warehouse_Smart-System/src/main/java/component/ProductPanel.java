@@ -52,6 +52,7 @@ public class ProductPanel extends javax.swing.JPanel {
     private SalesTracker tracker;
     private List<ProductSearch> products;
     private ReportsPanel reportsPanel;
+    private Map<String, JLabel> statusLabels = new HashMap<>();
     /**
      * Creates new form ProductPanel
      */
@@ -141,6 +142,7 @@ public class ProductPanel extends javax.swing.JPanel {
     jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
 
     for (ProductSearch p : list) {
+        tracker.initializeStock(p.getName());
         JPanel row = new JPanel(new BorderLayout(10, 10));
         row.setBackground(new java.awt.Color(40, 40, 40));
         row.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -165,12 +167,16 @@ public class ProductPanel extends javax.swing.JPanel {
         codeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
        int totalStock = tracker.getTotalStock(p.getName());
+      
+       
         String stockText = (totalStock > 0) ? "Stock: " + totalStock : "Out of Stock";
-
+        
         JLabel statusLabel = new JLabel(stockText);
         statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
         statusLabel.setForeground(totalStock > 0 ? Color.GREEN : Color.RED);
-
+        statusLabels.put(p.getName(), statusLabel);
+        
+        
         JLabel locLabel = new JLabel(p.getLocation());
         locLabel.setForeground(Color.CYAN);
         locLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -187,6 +193,16 @@ public class ProductPanel extends javax.swing.JPanel {
 
     jPanel1.revalidate();
     jPanel1.repaint();
+}
+
+ public void updateStockLabel(String productName) {
+    JLabel statusLabel = statusLabels.get(productName);
+    if (statusLabel != null) {
+        int totalStock = tracker.getTotalStock(productName);
+        String stockText = (totalStock > 0) ? "Stock: " + totalStock : "Out of Stock";
+        statusLabel.setText(stockText);
+        statusLabel.setForeground(totalStock > 0 ? Color.GREEN : Color.RED);
+    }
 }
 
     
@@ -207,11 +223,15 @@ public class ProductPanel extends javax.swing.JPanel {
 
   
     loadProducts(sortedProducts);
+    
+    
 }
 
 
  
  private void showProductDialog(ProductSearch p) {
+     
+     tracker.initializeStock(p.getName());
     JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Product Details", true);
     dialog.setSize(430, 280);
     dialog.setLayout(new BorderLayout(10,10));
@@ -226,7 +246,8 @@ public class ProductPanel extends javax.swing.JPanel {
     detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.Y_AXIS));
     detailsPanel.add(new JLabel("Name: " + p.getName()));
     detailsPanel.add(new JLabel("Code: " + p.getCode()));
-    detailsPanel.add(new JLabel("Status: " + p.getStatus()));
+    JLabel stockLabel = new JLabel("Status: " + tracker.getStock(p.getName(), p.getLocation()));
+    detailsPanel.add(stockLabel);
     detailsPanel.add(new JLabel("Location: " + p.getLocation()));
     detailsPanel.add(new JLabel("<html><p style='width:200px;'>Description: " + p.getDescription() + "</p></html>"));
     
@@ -243,7 +264,7 @@ locationPanel.add(new JLabel("Select Location:"));
 
 
 String[] locations = {"Pasay", "Manila", "Taguig"}; 
-JComboBox<String> locationComboBox = new JComboBox<>(locations);
+JComboBox<String> locationComboBox = new JComboBox<>(tracker.getLocation());
 locationPanel.add(locationComboBox);
 detailsPanel.add(locationPanel);
 
@@ -257,6 +278,20 @@ detailsPanel.add(locationPanel);
     btnPanel.add(saveBtn);
     btnPanel.add(closeBtn);
     dialog.add(btnPanel, BorderLayout.SOUTH);
+    
+    locationComboBox.addActionListener(ev -> {
+     try {
+         String selectedLocation = (String) locationComboBox.getSelectedItem();
+         stockLabel.setText("Status: " + tracker.getStock(p.getName(), selectedLocation));
+        
+     }
+     catch(Exception ex) {
+         ex.printStackTrace();
+     }
+     
+    });
+     
+ 
 
    saveBtn.addActionListener(e -> {
     try {
@@ -265,27 +300,35 @@ detailsPanel.add(locationPanel);
             JOptionPane.showMessageDialog(dialog, "Please enter a valid quantity.");
             return;
         }
-
-       
+        
+        
         String selectedLocation = (String) locationComboBox.getSelectedItem();
-
+        
+        
+        int available = tracker.getStock(p.getName(), p.getLocation());
+        if (qty > available) {
+            JOptionPane.showMessageDialog(dialog, "Not enough stock! Available: " + available);
+            
+            return;
+            
+        }
+        
         if (dashboardPanel != null) {
             historyPanel.addSaleRecord(p.getName(), selectedLocation, qty);
             dashboardPanel.recordSale(selectedLocation, p.getName(), qty);
             reportsPanel.refreshDemand();
         }
-        
-          
 
+        
+        stockLabel.setText("Status: " + tracker.getStock(p.getName(), selectedLocation));
 
         JOptionPane.showMessageDialog(dialog, "Sale recorded successfully!");
-        dialog.dispose();
+        updateStockLabel(p.getName());
 
     } catch (NumberFormatException ex) {
         JOptionPane.showMessageDialog(dialog, "Invalid number entered.");
     }
 });
-
 
     closeBtn.addActionListener(e -> dialog.dispose());
 
@@ -552,6 +595,7 @@ private ImageIcon loadImage(String path, int w, int h) {
         String selected = (String) jComboBox1.getSelectedItem();
         if ("Alphabetical".equals(selected)) {
             reloadProductsAlphabetical();
+           
         } 
         
          else {

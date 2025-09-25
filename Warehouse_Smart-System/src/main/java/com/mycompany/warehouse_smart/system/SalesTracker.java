@@ -45,7 +45,7 @@ private final String[] LOCATIONS = {"Manila", "Taguig", "Pasay"};
         productHeap = new PriorityQueue<>((a, b) -> b.getValue() - a.getValue());
         locationTotals = new HashMap<>();
         locationHeap = new PriorityQueue<>((a, b) -> b.getValue() - a.getValue());
-
+        
         
         
         addLocation("Manila");
@@ -104,22 +104,26 @@ private final String[] LOCATIONS = {"Manila", "Taguig", "Pasay"};
         
         
     }
+    public String[] getLocation() {
+        return LOCATIONS;
+        
+    }
 
     private void addLocation(String location) {
         salesData.putIfAbsent(location, new HashMap<>());
     }
 
     private void addProduct(String product) {
-    // Ensure sales data structure
+        
     for (String location : salesData.keySet()) {
         salesData.get(location).putIfAbsent(product, 0);
     }
 
-    // Initialize stock if not already done
+    
     if (stockData == null) {
         stockData = new HashMap<>();
     }
-
+    
     Map<String, Integer> locationStock = new HashMap<>();
     for (String loc : LOCATIONS) {
         locationStock.put(loc, INITIAL_STOCK);
@@ -128,21 +132,30 @@ private final String[] LOCATIONS = {"Manila", "Taguig", "Pasay"};
     stockData.put(product, locationStock);
 }
 
+    public void initializeStock(String product) {
+        if(!stockData.containsKey(product)) {
+            stockData.put(product, new HashMap<>());
+        }
         
+        for(String loc : LOCATIONS) {
+            stockData.get(product).putIfAbsent(loc, 10000);
+        }
+    }
+
     
 public void recordSale(String location, String product, int qty) {
-    // --- STOCK CHECK ---
+  
     if (stockData != null && stockData.containsKey(product)) {
         Map<String, Integer> locStock = stockData.get(product);
         int current = locStock.getOrDefault(location, 0);
         if (current < qty) {
             System.out.println("Not enough stock for " + product + " in " + location);
-            return; // stop sale if not enough
+            return; 
         }
         locStock.put(location, current - qty);
     }
 
-    // --- SALES LOGIC ---
+ 
     salesData.putIfAbsent(location, new HashMap<>());
     Map<String, Integer> productMap = salesData.get(location);
     productMap.put(product, productMap.getOrDefault(product, 0) + qty);
@@ -159,20 +172,22 @@ public void recordSale(String location, String product, int qty) {
     totalCustomers++;
 }
 
-// Get stock for specific product and location
+
 public int getStock(String product, String location) {
-    if (stockData == null || !stockData.containsKey(product)) return 0;
-    return stockData.get(product).getOrDefault(location, 0);
+    if (stockData.containsKey(product)) {
+        return stockData.get(product).getOrDefault(location, 0);
+    }
+    
+    return 0;
 }
 
-// Get total stock across all locations
 public int getTotalStock(String product) {
-    if (stockData == null || !stockData.containsKey(product)) return 0;
-    int total = 0;
-    for (String loc : LOCATIONS) {
-        total += stockData.get(product).get(loc);
+    if (!stockData.containsKey(product)) return 0;
+    int sum = 0;
+    for (int val : stockData.get(product).values()) {
+        sum += val;
     }
-    return total;
+    return sum;
 }
 
  public int getTotalSales() {

@@ -182,7 +182,7 @@ public class ReportsPanel extends javax.swing.JPanel {
     int rowHeight = 40;
     int rank = 1;
      JPanel row = new JPanel();
-     //row.setLayout(new GridLayout(0, 3, 0, 0));
+  
     for (Map.Entry<String, Integer> entry : locationSalesList) {
        
         row.setBackground(new Color(40, 40, 40));
