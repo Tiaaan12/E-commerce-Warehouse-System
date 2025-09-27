@@ -258,7 +258,7 @@ public class DashboardPanel extends javax.swing.JPanel {
         jProductCounter.setFont(robotoL);
         jProductCounter.setForeground(Color.decode("#E05454"));
         jProductCounter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jProductCounter.setText("100000");
+        jProductCounter.setText("270000");
         jProductCounter.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jPanel9.add(jProductCounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 80, 180, -1));
 

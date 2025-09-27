@@ -36,10 +36,13 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import com.mycompany.warehouse_smart.system.SalesTracker;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JList;
 
 /**
  *
@@ -68,7 +71,8 @@ public class ProductPanel extends javax.swing.JPanel {
           reportsPanel = new ReportsPanel(tracker);
  
     ProductSearch p1 = new ProductSearch("1012243", "AquaThirst Colorwave", 
-            "100", "Manila", "Stylish flip-top bottle", 
+            "100", "Manila"
+                    + "", "Stylish flip-top bottle", 
             new ImageIcon(getClass().getResource("/1012243.png")));
 
     ProductSearch p2 = new ProductSearch("1012249", "AquaThirst Dream", 
@@ -177,7 +181,17 @@ public class ProductPanel extends javax.swing.JPanel {
         statusLabels.put(p.getName(), statusLabel);
         
         
-        JLabel locLabel = new JLabel(p.getLocation());
+        StringBuilder locationsStr = new StringBuilder();
+for (String loc : tracker.getLocation()) {
+    locationsStr.append(loc).append(", ");
+}
+
+if (locationsStr.length() > 2) {
+    locationsStr.setLength(locationsStr.length() - 2);
+}
+JLabel locLabel = new JLabel(locationsStr.toString());
+locLabel.setForeground(Color.CYAN);
+locLabel.setHorizontalAlignment(SwingConstants.CENTER);
         locLabel.setForeground(Color.CYAN);
         locLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -231,9 +245,9 @@ public class ProductPanel extends javax.swing.JPanel {
  
  private void showProductDialog(ProductSearch p) {
      
-     tracker.initializeStock(p.getName());
+    
     JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Product Details", true);
-    dialog.setSize(430, 280);
+    dialog.setSize(480, 320);
     dialog.setLayout(new BorderLayout(10,10));
     dialog.setLocationRelativeTo(this);
     dialog.setBackground(Color.decode("#212121"));
@@ -244,27 +258,69 @@ public class ProductPanel extends javax.swing.JPanel {
 
     JPanel detailsPanel = new JPanel();
     detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.Y_AXIS));
-    detailsPanel.add(new JLabel("Name: " + p.getName()));
-    detailsPanel.add(new JLabel("Code: " + p.getCode()));
-    JLabel stockLabel = new JLabel("Status: " + tracker.getStock(p.getName(), p.getLocation()));
-    detailsPanel.add(stockLabel);
-    detailsPanel.add(new JLabel("Location: " + p.getLocation()));
-    detailsPanel.add(new JLabel("<html><p style='width:200px;'>Description: " + p.getDescription() + "</p></html>"));
+    JLabel nameLabel = new JLabel("Name: " + p.getName());
+    nameLabel.setFont(new Font("Sanserif", Font.BOLD, 16));
+    detailsPanel.add(nameLabel);
+    JLabel codeLabel = new JLabel("Code: " + p.getCode());
+    codeLabel.setFont(new Font("Sanserif", Font.BOLD, 16));
+    detailsPanel.add(codeLabel);
+    String[] globalLocations = tracker.getLocation();   
+JLabel stockLabel = new JLabel("Status: " + tracker.getStock(p.getName(), globalLocations[0]));
+stockLabel.setFont(new Font("Sanserif", Font.BOLD, 16));
+detailsPanel.add(stockLabel);
+
+    JLabel locLabel = new JLabel("Location: " + String.join(", ", tracker.getLocation()));
+    locLabel.setFont(new Font("Sanserif", Font.BOLD, 16));
+    detailsPanel.add(locLabel);
+    
+    JLabel desLabel = new JLabel("<html><p style='width:200px;'>Description: " + p.getDescription() + "</p></html>");
+    desLabel.setFont(new Font("Sanserif", Font.BOLD, 16));
+    detailsPanel.add(desLabel);
     
     
     JPanel salePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    JLabel saleLabel = new JLabel("Enter Sales:");
+    saleLabel.setFont(new Font("Sanserif", Font.BOLD, 16));
+    salePanel.add(saleLabel);
     
-    salePanel.add(new JLabel("Enter Sales:"));
-    JTextField qtyField = new JTextField(5);
+    Dimension fieldSize = new Dimension(160, saleLabel.getFont().getSize() + 12);
+    JTextField qtyField = new JTextField();
+    qtyField.setPreferredSize(fieldSize);
+qtyField.setBackground(Color.decode("#5541CB"));
+qtyField.setForeground(Color.WHITE);
+qtyField.setCaretColor(Color.WHITE);
+qtyField.setFont(saleLabel.getFont());
     salePanel.add(qtyField);
     detailsPanel.add(salePanel);
    
 JPanel locationPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-locationPanel.add(new JLabel("Select Location:"));
+JLabel locationLabel = new JLabel("Select Location:");
+locationLabel.setFont(new Font("Sanserif", Font.BOLD, 16));
+locationPanel.add(locationLabel);
 
 
 String[] locations = {"Pasay", "Manila", "Taguig"}; 
 JComboBox<String> locationComboBox = new JComboBox<>(tracker.getLocation());
+locationComboBox.setPreferredSize(fieldSize);
+locationComboBox.setFont(locationLabel.getFont());
+locationComboBox.setRenderer(new DefaultListCellRenderer() {
+    @Override
+    public Component getListCellRendererComponent(JList<?> list, Object value, int index,
+                                                  boolean isSelected, boolean cellHasFocus) {
+        JLabel lbl = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+        if (isSelected) {
+            lbl.setBackground(Color.decode("#5541CB"));
+            lbl.setForeground(Color.WHITE);
+        } else {
+           
+            lbl.setForeground(Color.BLACK);
+        }
+
+        return lbl;
+    }
+});
+
 locationPanel.add(locationComboBox);
 detailsPanel.add(locationPanel);
 
@@ -272,8 +328,23 @@ detailsPanel.add(locationPanel);
     dialog.add(detailsPanel, BorderLayout.CENTER);
 
     JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+    
+Dimension btnSize = new Dimension(140, 35);
+
     JButton saveBtn = new JButton("Record Sale");
+    saveBtn.setPreferredSize(btnSize);
+saveBtn.setBackground(Color.decode("#5541CB"));
+saveBtn.setForeground(Color.WHITE);
+saveBtn.setFocusPainted(false);
+saveBtn.setBorderPainted(false);
+saveBtn.setFont(new Font("Sanserif", Font.BOLD, 14));
     JButton closeBtn = new JButton("Close");
+    closeBtn.setPreferredSize(btnSize);
+closeBtn.setBackground(Color.decode("#5541CB"));
+closeBtn.setForeground(Color.WHITE);
+closeBtn.setFocusPainted(false);
+closeBtn.setBorderPainted(false);
+closeBtn.setFont(new Font("Sanserif", Font.BOLD, 14));
 
     btnPanel.add(saveBtn);
     btnPanel.add(closeBtn);
@@ -305,7 +376,7 @@ detailsPanel.add(locationPanel);
         String selectedLocation = (String) locationComboBox.getSelectedItem();
         
         
-        int available = tracker.getStock(p.getName(), p.getLocation());
+        int available = tracker.getStock(p.getName(), selectedLocation);
         if (qty > available) {
             JOptionPane.showMessageDialog(dialog, "Not enough stock! Available: " + available);
             

@@ -34,7 +34,7 @@ import component.LocationPanel;
 import component.ProductPanel;
 import component.HistoryPanel;
 import component.ReportsPanel;
-        
+import component.JDialog;
 
 
 import javax.swing.*;
@@ -54,15 +54,16 @@ public class Dashboard extends javax.swing.JFrame {
    private HistoryPanel historyPanel;
    private ReportsPanel reportsPanel;
    private DashboardPanel dashboardPanel;
+   private JDialog jDialog;
     /**
      * Creates new form Dashboard
      */
     public Dashboard() {
         initComponents();
-       
+            jDialog = new JDialog();
            tracker = new SalesTracker();
-         dashboardPanel1 = new DashboardPanel(tracker);
-        dashboardPanel1.updateChart();
+         dashboardPanel = new DashboardPanel(tracker);
+        dashboardPanel.updateChart();
         
         historyPanel = new HistoryPanel(tracker);
         jPanel17.add(historyPanel, "History");
@@ -70,9 +71,9 @@ public class Dashboard extends javax.swing.JFrame {
          reportsPanel = new ReportsPanel(tracker);
          jPanel17.add(reportsPanel, "Reports");
         
-         jPanel17.add(dashboardPanel1, "Dashboard");
+         jPanel17.add(dashboardPanel, "Dashboard");
          
-         productPanel = new ProductPanel(dashboardPanel1, historyPanel,tracker, reportsPanel);
+         productPanel = new ProductPanel(dashboardPanel, historyPanel,tracker, reportsPanel);
          productPanel.setOpaque(false);
          jPanel17.add(productPanel, "Product");
          
@@ -84,7 +85,7 @@ public class Dashboard extends javax.swing.JFrame {
    CardLayout cl = (CardLayout) jPanel17.getLayout();
     cl.show(jPanel17, "Dashboard");
     
-    dashboardPanel1.setTracker(tracker);
+    dashboardPanel.setTracker(tracker);
     productPanel.setTracker(tracker);
     reportsPanel.setTracker(tracker);
 
@@ -125,8 +126,8 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel18 = new RoundPanel(20);
         jLabel24 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel17 = new javax.swing.JPanel();
-        dashboardPanel1 = new component.DashboardPanel(tracker);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(Color.decode("#1A1A1A"));
@@ -331,13 +332,11 @@ public class Dashboard extends javax.swing.JFrame {
         Font roboto1 = FontLoader.loadFont("resources/fonts/Roboto-ExtraBold.ttf", 20f);
         jTxtTime.setFont(roboto1);
         jTxtTime.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jTxtTime.setText("jLabel4");
         jPanel2.add(jTxtTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 180, -1));
 
         Font roboto3 = FontLoader.loadFont("resources/fonts/Roboto-ExtraBold.ttf", 15f);
         jTxtDate.setFont(roboto3);
         jTxtDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jTxtDate.setText("jLabel4");
         jPanel2.add(jTxtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 180, -1));
 
         jPanel18.setBackground(Color.decode("#212121"));
@@ -377,13 +376,18 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel2.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 174, 40));
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, -1, -1));
+
         jPanel17.setBackground(Color.decode("#1A1A1A"));
         jPanel17.setOpaque(false);
         jPanel17.setPreferredSize(new java.awt.Dimension(842, 567));
         jPanel17.setLayout(new java.awt.CardLayout());
-
-        dashboardPanel1.setOpaque(false);
-        jPanel17.add(dashboardPanel1, "card2");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -490,6 +494,13 @@ public class Dashboard extends javax.swing.JFrame {
     jPanel14.setBackground(Color.decode("#212121"));
     
     }//GEN-LAST:event_jPanel18MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JDialog dialog = new JDialog();
+       
+        dialog.setVisible(true);
+
+    }//GEN-LAST:event_jButton1ActionPerformed
     public void setTime() {
         new Thread(new Runnable() {
             @Override
@@ -560,7 +571,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private component.DashboardPanel dashboardPanel1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

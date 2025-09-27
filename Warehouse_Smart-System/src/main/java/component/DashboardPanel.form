@@ -250,7 +250,7 @@
               <Connection code="Color.decode(&quot;#E05454&quot;)" type="code"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="100000"/>
+            <Property name="text" type="java.lang.String" value="270000"/>
             <Property name="verticalAlignment" type="int" value="1"/>
           </Properties>
           <AuxValues>

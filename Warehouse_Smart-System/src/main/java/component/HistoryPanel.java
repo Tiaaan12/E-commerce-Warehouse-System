@@ -6,12 +6,20 @@ package component;
 
 import com.mycompany.warehouse_smart.system.SalesTracker;
 import com.mycompany.warehouse_smart.system.Styledpanel;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.ScrollPane;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import util.FontLoader;
+import javax.swing.JButton;
 
 
 /**
@@ -74,6 +82,40 @@ private SalesTracker tracker;
 
         tableModel.addRow(new Object[]{product, location, time, quantity});
     }
+    
+    public void printPreview(JTable jTable1) {
+           
+        JDialog previewDialog = new JDialog();
+        previewDialog.setTitle("Print Preview");
+                
+        previewDialog.setLayout(new BorderLayout());
+        
+          DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+    centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        JTable previewTable = new JTable(jTable1.getModel());
+         for (int i = 0; i < jTable1.getColumnCount(); i++) {
+        previewTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+}
+      
+        previewDialog.add(new JScrollPane(previewTable), BorderLayout.CENTER);
+        
+        
+        
+        JButton printButton = new JButton("Print");
+        printButton.addActionListener(e -> {
+            try {
+                jTable1.print(JTable.PrintMode.FIT_WIDTH);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        
+        previewDialog.add(printButton, BorderLayout.SOUTH);
+        
+        previewDialog.setSize(550, 400);
+        previewDialog.setLocationRelativeTo(null);
+        previewDialog.setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -113,6 +155,8 @@ private SalesTracker tracker;
                 return c;
             }
         });
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel13 = new Styledpanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -159,6 +203,26 @@ private SalesTracker tracker;
     jTable1.setShowVerticalLines(true);
     jScrollPane2.setViewportView(jTable1);
 
+    jButton1.setBackground(Color.decode("#5541CB"));
+    jButton1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+    jButton1.setForeground(Color.decode("#D6D6D6"));
+    jButton1.setText("Print");
+    jButton1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton1ActionPerformed(evt);
+        }
+    });
+
+    jButton2.setBackground(Color.decode("#5541CB"));
+    jButton2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+    jButton2.setForeground(Color.decode("#D6D6D6"));
+    jButton2.setText("Preview");
+    jButton2.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton2ActionPerformed(evt);
+        }
+    });
+
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
@@ -166,12 +230,22 @@ private SalesTracker tracker;
         .addGroup(jPanel1Layout.createSequentialGroup()
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 796, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(0, 17, Short.MAX_VALUE))
+        .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGap(222, 222, 222)
+            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(18, 18, 18)
+            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanel1Layout.setVerticalGroup(
         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanel1Layout.createSequentialGroup()
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 17, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 22, Short.MAX_VALUE))
     );
 
     jScrollPane1.setViewportView(jPanel1);
@@ -216,8 +290,29 @@ private SalesTracker tracker;
     );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            boolean complete = jTable1.print();
+            if(complete) {
+                JOptionPane.showMessageDialog(this, "Printing Complete", "Print Status", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Printing Cancelled", "Print Status", JOptionPane.WARNING_MESSAGE);    
+            }
+}
+           catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Print Error", JOptionPane.ERROR_MESSAGE);
+                }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       printPreview(jTable1);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;

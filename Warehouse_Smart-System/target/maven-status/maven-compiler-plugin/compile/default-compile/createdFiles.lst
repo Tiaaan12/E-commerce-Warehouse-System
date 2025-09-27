@@ -1,5 +1,6 @@
 com\mycompany\warehouse_smart\system\Dashboard$2.class
 component\LocationPanel$1.class
+com\mycompany\warehouse_smart\system\Dashboard$12.class
 component\ReportsPanel.class
 component\HistoryPanel$1.class
 com\mycompany\warehouse_smart\system\Dashboard$5.class
@@ -11,6 +12,7 @@ component\ProductPanel$3.class
 component\ProductPanel$6.class
 com\mycompany\warehouse_smart\system\Products$3.class
 com\mycompany\warehouse_smart\system\Products$6.class
+component\ProductPanel$7.class
 com\mycompany\warehouse_smart\system\Dashboard$4.class
 com\mycompany\warehouse_smart\system\RoundedTextField.class
 component\PanelCover.class
@@ -19,6 +21,7 @@ com\mycompany\warehouse_smart\system\Dashboard$10.class
 com\mycompany\warehouse_smart\system\Products$5.class
 component\ProductPanel$1.class
 com\mycompany\warehouse_smart\system\Dashboard$3.class
+component\JDialog.class
 com\mycompany\warehouse_smart\system\SalesTracker.class
 component\DashboardPanel.class
 com\mycompany\warehouse_smart\system\Login$4.class
@@ -33,6 +36,7 @@ component\HistoryPanel.class
 component\ProductPanel$2.class
 com\mycompany\warehouse_smart\system\Dashboard$11.class
 com\mycompany\warehouse_smart\system\Warehouse_SmartSystem.class
+component\HistoryPanel$5.class
 com\mycompany\warehouse_smart\system\Login.class
 component\HistoryPanel$2.class
 com\mycompany\warehouse_smart\system\Dashboard.class
@@ -49,5 +53,6 @@ util\FontLoader.class
 com\mycompany\warehouse_smart\system\Styledpanel.class
 component\ProductPanel$4.class
 com\mycompany\warehouse_smart\system\Dashboard$6.class
+component\HistoryPanel$4.class
 component\LocationPanel.class
 com\mycompany\warehouse_smart\system\Products$8.class
