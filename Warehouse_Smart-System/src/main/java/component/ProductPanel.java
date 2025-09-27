@@ -43,6 +43,7 @@ import java.util.HashSet;
 import java.util.Map;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -241,170 +242,138 @@ locLabel.setHorizontalAlignment(SwingConstants.CENTER);
     
 }
 
-
- 
- private void showProductDialog(ProductSearch p) {
-     
-    
+private void showProductDialog(ProductSearch p) {
     JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Product Details", true);
     dialog.setSize(480, 320);
-    dialog.setLayout(new BorderLayout(10,10));
     dialog.setLocationRelativeTo(this);
-    dialog.setBackground(Color.decode("#212121"));
+
+    JPanel mainPanel = new JPanel();
+    mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+    mainPanel.setBackground(Color.decode("#2C2C2C"));
+    mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+    dialog.setContentPane(mainPanel);
+
+    Font boldFont = new Font("SansSerif", Font.BOLD, 14);
+
+   
     JLabel imgLabel = new JLabel();
-    imgLabel.setHorizontalAlignment(SwingConstants.CENTER);
-    imgLabel.setIcon(new ImageIcon(p.getImage().getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH)));
-    dialog.add(imgLabel, BorderLayout.WEST);
+    imgLabel.setIcon(new ImageIcon(p.getImage().getImage().getScaledInstance(125, 125, Image.SCALE_SMOOTH)));
 
     JPanel detailsPanel = new JPanel();
     detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.Y_AXIS));
+    detailsPanel.setOpaque(false);
+
     JLabel nameLabel = new JLabel("Name: " + p.getName());
-    nameLabel.setFont(new Font("Sanserif", Font.BOLD, 16));
-    detailsPanel.add(nameLabel);
     JLabel codeLabel = new JLabel("Code: " + p.getCode());
-    codeLabel.setFont(new Font("Sanserif", Font.BOLD, 16));
-    detailsPanel.add(codeLabel);
-    String[] globalLocations = tracker.getLocation();   
-JLabel stockLabel = new JLabel("Status: " + tracker.getStock(p.getName(), globalLocations[0]));
-stockLabel.setFont(new Font("Sanserif", Font.BOLD, 16));
-detailsPanel.add(stockLabel);
-
+    JLabel stockLabel = new JLabel("Status: " + tracker.getStock(p.getName(), tracker.getLocation()[0]));
     JLabel locLabel = new JLabel("Location: " + String.join(", ", tracker.getLocation()));
-    locLabel.setFont(new Font("Sanserif", Font.BOLD, 16));
-    detailsPanel.add(locLabel);
-    
     JLabel desLabel = new JLabel("<html><p style='width:200px;'>Description: " + p.getDescription() + "</p></html>");
-    desLabel.setFont(new Font("Sanserif", Font.BOLD, 16));
-    detailsPanel.add(desLabel);
-    
-    
-    JPanel salePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    JLabel saleLabel = new JLabel("Enter Sales:");
-    saleLabel.setFont(new Font("Sanserif", Font.BOLD, 16));
-    salePanel.add(saleLabel);
-    
-    Dimension fieldSize = new Dimension(160, saleLabel.getFont().getSize() + 12);
-    JTextField qtyField = new JTextField();
-    qtyField.setPreferredSize(fieldSize);
-qtyField.setBackground(Color.decode("#5541CB"));
-qtyField.setForeground(Color.WHITE);
-qtyField.setCaretColor(Color.WHITE);
-qtyField.setFont(saleLabel.getFont());
-    salePanel.add(qtyField);
-    detailsPanel.add(salePanel);
-   
-JPanel locationPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-JLabel locationLabel = new JLabel("Select Location:");
-locationLabel.setFont(new Font("Sanserif", Font.BOLD, 16));
-locationPanel.add(locationLabel);
 
-
-String[] locations = {"Pasay", "Manila", "Taguig"}; 
-JComboBox<String> locationComboBox = new JComboBox<>(tracker.getLocation());
-locationComboBox.setPreferredSize(fieldSize);
-locationComboBox.setFont(locationLabel.getFont());
-locationComboBox.setRenderer(new DefaultListCellRenderer() {
-    @Override
-    public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-                                                  boolean isSelected, boolean cellHasFocus) {
-        JLabel lbl = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-
-        if (isSelected) {
-            lbl.setBackground(Color.decode("#5541CB"));
-            lbl.setForeground(Color.WHITE);
-        } else {
-           
-            lbl.setForeground(Color.BLACK);
-        }
-
-        return lbl;
+    for (JLabel lbl : new JLabel[]{nameLabel, codeLabel, stockLabel, locLabel, desLabel}) {
+        lbl.setFont(boldFont);
+        lbl.setForeground(Color.WHITE);
+        detailsPanel.add(lbl);
     }
-});
 
-locationPanel.add(locationComboBox);
-detailsPanel.add(locationPanel);
+    JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 5));
+    topPanel.setOpaque(false);
+    topPanel.add(imgLabel);
+    topPanel.add(detailsPanel);
 
+    mainPanel.add(topPanel);
 
-    dialog.add(detailsPanel, BorderLayout.CENTER);
+    // === MIDDLE (Enter Sales + Select Location) ===
+    JPanel middlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 5));
+    middlePanel.setOpaque(false);
 
-    JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-    
-Dimension btnSize = new Dimension(140, 35);
+    JLabel saleLabel = new JLabel("Enter Sales:");
+    saleLabel.setFont(boldFont);
+    saleLabel.setForeground(Color.WHITE);
+
+    JTextField qtyField = new JTextField(4);
+    qtyField.setFont(boldFont);
+    qtyField.setBorder(new LineBorder(Color.decode("#5541CB")));
+    qtyField.setForeground(Color.WHITE);
+    qtyField.setCaretColor(Color.WHITE);
+
+    JLabel locationLabel = new JLabel("Select Location:");
+    locationLabel.setFont(boldFont);
+    locationLabel.setForeground(Color.WHITE);
+
+    JComboBox<String> locationComboBox = new JComboBox<>(tracker.getLocation());
+    locationComboBox.setFont(boldFont);
+
+    middlePanel.add(saleLabel);
+    middlePanel.add(qtyField);
+    middlePanel.add(locationLabel);
+    middlePanel.add(locationComboBox);
+
+    mainPanel.add(middlePanel);
+
+    // === BUTTONS (centered) ===
+    JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 5));
+    btnPanel.setOpaque(false);
+
+    Dimension btnSize = new Dimension(130, 30);
 
     JButton saveBtn = new JButton("Record Sale");
     saveBtn.setPreferredSize(btnSize);
-saveBtn.setBackground(Color.decode("#5541CB"));
-saveBtn.setForeground(Color.WHITE);
-saveBtn.setFocusPainted(false);
-saveBtn.setBorderPainted(false);
-saveBtn.setFont(new Font("Sanserif", Font.BOLD, 14));
+    saveBtn.setBackground(Color.decode("#5541CB"));
+    saveBtn.setForeground(Color.WHITE);
+    saveBtn.setFont(boldFont);
+
     JButton closeBtn = new JButton("Close");
     closeBtn.setPreferredSize(btnSize);
-closeBtn.setBackground(Color.decode("#5541CB"));
-closeBtn.setForeground(Color.WHITE);
-closeBtn.setFocusPainted(false);
-closeBtn.setBorderPainted(false);
-closeBtn.setFont(new Font("Sanserif", Font.BOLD, 14));
+    closeBtn.setBackground(Color.decode("#5541CB"));
+    closeBtn.setForeground(Color.WHITE);
+    closeBtn.setFont(boldFont);
 
     btnPanel.add(saveBtn);
     btnPanel.add(closeBtn);
-    dialog.add(btnPanel, BorderLayout.SOUTH);
-    
+
+    mainPanel.add(btnPanel);
+
+    // === LISTENERS ===
     locationComboBox.addActionListener(ev -> {
-     try {
-         String selectedLocation = (String) locationComboBox.getSelectedItem();
-         stockLabel.setText("Status: " + tracker.getStock(p.getName(), selectedLocation));
-        
-     }
-     catch(Exception ex) {
-         ex.printStackTrace();
-     }
-     
-    });
-     
- 
-
-   saveBtn.addActionListener(e -> {
-    try {
-        int qty = Integer.parseInt(qtyField.getText().trim());
-        if (qty <= 0) {
-            JOptionPane.showMessageDialog(dialog, "Please enter a valid quantity.");
-            return;
-        }
-        
-        
         String selectedLocation = (String) locationComboBox.getSelectedItem();
-        
-        
-        int available = tracker.getStock(p.getName(), selectedLocation);
-        if (qty > available) {
-            JOptionPane.showMessageDialog(dialog, "Not enough stock! Available: " + available);
-            
-            return;
-            
-        }
-        
-        if (dashboardPanel != null) {
-            historyPanel.addSaleRecord(p.getName(), selectedLocation, qty);
-            dashboardPanel.recordSale(selectedLocation, p.getName(), qty);
-            reportsPanel.refreshDemand();
-        }
-
-        
         stockLabel.setText("Status: " + tracker.getStock(p.getName(), selectedLocation));
+    });
 
-        JOptionPane.showMessageDialog(dialog, "Sale recorded successfully!");
-        updateStockLabel(p.getName());
+    saveBtn.addActionListener(e -> {
+        try {
+            int qty = Integer.parseInt(qtyField.getText().trim());
+            if (qty <= 0) {
+                JOptionPane.showMessageDialog(dialog, "Please enter a valid quantity.");
+                return;
+            }
 
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(dialog, "Invalid number entered.");
-    }
-});
+            String selectedLocation = (String) locationComboBox.getSelectedItem();
+            int available = tracker.getStock(p.getName(), selectedLocation);
+
+            if (qty > available) {
+                JOptionPane.showMessageDialog(dialog, "Not enough stock! Available: " + available);
+                return;
+            }
+
+            if (dashboardPanel != null) {
+                historyPanel.addSaleRecord(p.getName(), selectedLocation, qty);
+                dashboardPanel.recordSale(selectedLocation, p.getName(), qty);
+                reportsPanel.refreshDemand();
+            }
+
+            stockLabel.setText("Status: " + tracker.getStock(p.getName(), selectedLocation));
+            JOptionPane.showMessageDialog(dialog, "Sale recorded successfully!");
+            updateStockLabel(p.getName());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(dialog, "Invalid number entered.");
+        }
+    });
 
     closeBtn.addActionListener(e -> dialog.dispose());
 
     dialog.setVisible(true);
 }
+
 
  
 
