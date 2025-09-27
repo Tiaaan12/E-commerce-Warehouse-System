@@ -282,7 +282,7 @@ private void showProductDialog(ProductSearch p) {
 
     mainPanel.add(topPanel);
 
-    // === MIDDLE (Enter Sales + Select Location) ===
+
     JPanel middlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 5));
     middlePanel.setOpaque(false);
 
@@ -310,7 +310,7 @@ private void showProductDialog(ProductSearch p) {
 
     mainPanel.add(middlePanel);
 
-    // === BUTTONS (centered) ===
+  
     JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 5));
     btnPanel.setOpaque(false);
 
@@ -333,7 +333,7 @@ private void showProductDialog(ProductSearch p) {
 
     mainPanel.add(btnPanel);
 
-    // === LISTENERS ===
+    
     locationComboBox.addActionListener(ev -> {
         String selectedLocation = (String) locationComboBox.getSelectedItem();
         stockLabel.setText("Status: " + tracker.getStock(p.getName(), selectedLocation));
